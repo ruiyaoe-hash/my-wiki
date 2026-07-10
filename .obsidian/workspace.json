@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "agents/踩坑集.md",
+                "file": "知识库/Runtime Object 识别规则.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "踩坑集"
+              "title": "Runtime Object 识别规则"
             }
           }
         ]
@@ -183,44 +183,44 @@
       "bases:新建数据库": false
     }
   },
-  "active": "1df2ab4cd4d03a59",
+  "active": "684b602045a77f32",
   "lastOpenFiles": [
+    "知识库/Agent OS 终局愿景.md",
+    "_new3.py",
+    "知识库/终局对抗性审查记录.md",
+    "_new2.py",
+    "知识库/Agent Runtime 开发路线图.md",
+    "_new1.py",
+    "_enrich_all.py",
+    "_enrich1.py",
+    "_writer.py",
+    "知识库/EVR 方法论.md",
+    "知识库/Agent Runtime 七层架构.md",
+    "知识库/Agent Runtime v0.1.md",
+    "agents/踩坑集.md",
     "知识库/Schema Extraction 方法.md",
     "知识库/State 与 Memory 的分离.md",
-    "知识库/Agent Runtime 七层架构.md",
     "知识库/Runtime Object 识别规则.md",
-    "知识库/EVR 方法论.md",
-    "知识库/Agent Runtime v0.1.md",
     "_write_pages.py",
     "_update_signals.py",
     "_log_update.py",
     "知识库/Harness 工程对我们的启示.md",
-    "agents/踩坑集.md",
     "_apply_changes.py",
     "知识库/Harness 工程.md",
     "知识库/自我演化记忆 Self-Evolving Memory.md",
     "知识库/📋 Agent 架构与协作.md",
     "知识库/📋 市场信号.md",
-    "_update_meta.py",
     "源/原文/claude-code-leaked-architecture.md",
     "源/原文/karpathy-autoresearch-readme.md",
-    "_save_readmes.py",
     "源/摘要/harness-engineering-self-improvement-summary.md",
     "源/原文/wechat-harness-engineering-machine-heart-2026-07-08.md",
     "源/原文/lilian-weng-harness-engineering-2026-07-04.md",
-    "_ingest_harness.py",
     "log.md",
-    "_signals.py",
     "源/摘要/index.md",
     "归档/会话/2026-07-08 会话归档.md",
-    "_fix_links.py",
     "源/原文/index.md",
     "归档/日志/2026-06-log.md",
-    "归档/暂存归档/硅基流动_横纵分析报告.pdf",
     "归档/暂存归档/硅基流动_横纵分析报告.md",
-    "源/原文/workflows.md",
-    "源/原文/routines.md",
-    "源/原文/goal.md",
     "_test_img.jpg"
   ]
 }

@@ -42,3 +42,8 @@ Runtime 能通过 task-id 找到它、查询 status（created/running/done）、
 ### 边缘：Capability
 
 有名字 research，但 Runtime 会不会查询 research 的状态然后做决策？不会。Runtime 直接用 Workflow。Capability 更像一个标签层。
+
+
+## 不需要 Non-Object.md
+
+如果 Object Rule 足够清晰，不需要一个单独的文件列出什么不是 Object。三个判定示例就足够。

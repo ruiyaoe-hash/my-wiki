@@ -33,7 +33,19 @@ tags:
 
 混在一起的结果：hot.md 越来越长，AI 恢复上下文越来越慢，两个不同 Agent 同时修改会冲突。
 
-## 拆分方案
+## 
+## Memory 五层架构
+
+| 层 | 名称 | 内容 | 生命周期 |
+|---|------|------|---------|
+| L0 | Working Memory | 本次 Task 瞬时上下文 | Task 结束清空 |
+| L1 | Session Memory | 本次会话所有操作 | 会话结束归档 |
+| L2 | Project Memory | 跨会话项目待办和进展 | 项目周期内 |
+| L3 | Semantic Memory | 永久知识（现有 75 页） | 长期维护 |
+| L4 | Archive | 历史归档 | 永久保存 |
+
+hot.md 目前承担了 L0+L1+L2 三层，必须拆分。
+拆分方案
 
 ### hot.md 保留
 

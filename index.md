@@ -40,6 +40,19 @@
 - [[State 与 Memory 的分离]] — 瞬时状态与不可变记录的分离方案
 - [[Schema Extraction 方法]] — 从现有系统中发现隐性结构
 
+## 系统进化（2026-07-10 大改版）
+
+- [[Agent Runtime v0.1]] — 从 AI Wiki 到 Agent 运行时的核心概念
+- [[EVR 方法论]] — Extraction -> Validation -> Refinement
+- [[Runtime Object 识别规则]] — 站在 Runtime 视角判定一等对象
+- [[Agent Runtime 七层架构]] — 从 Vision 到 Interface 的完整分层
+- [[State 与 Memory 的分离]] — 瞬时状态与不可变记录
+- [[Schema Extraction 方法]] — 从现有系统中发现隐性结构
+- [[Agent Runtime 开发路线图]] — Phase 0-4 完整开发计划
+- [[终局对抗性审查记录]] — 13 条缺陷 + 3 个缺失组件
+- [[Agent OS 终局愿景]] — Agent Workspace 与跨周期护城河
+
+
 ## 资料库
 
 - [[源/摘要/index|源摘要索引]] — 所有外部资料的 AI 摘要

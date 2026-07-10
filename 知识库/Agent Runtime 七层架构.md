@@ -59,7 +59,43 @@ Exit：至少一个 Agent 在生产环境持续运行 7 天。
 模块：Agent Workspace UI。
 Exit：人类可以通过 UI 而非文件系统操作系统。
 
-## 关键设计决策
+## 
+## 四个 Primitive
+
+| Primitive | 做什么 | 例子 |
+|-----------|--------|------|
+| File | 持久化、版本控制、跨工具共享 | Markdown 知识页 |
+| State | 瞬时状态、任务队列、执行进度 | current-task.json |
+| Graph | 实体间关系、推理路径、冲突检测 | typed relations |
+| Execution | 调度、中断、恢复、执行 | Planner 循环 |
+
+Runtime = Execution，不是 File + State + Graph。前三者是数据，Execution 才是 Runtime 本身。
+
+## Graph 不是一种而是四种
+
+| Graph 类型 | 节点是 | 边是 | 谁用 |
+|-----------|--------|------|------|
+| Knowledge Graph | 概念页 | supports/conflicts/extends | Agent 读知识时 |
+| Capability Graph | 系统能力 | composed_of/prerequisite | Planner 选能力时 |
+| Workflow Graph | 步骤 | next_success/next_failure | Planner 执行时 |
+| Dependency Graph | 产出物 | derived_from/depends_on | 追溯来源 |
+
+## State Manager + Multi-Agent 协调
+
+State Manager 负责：Lock（乐观锁）、Validate（schema 校验）、Merge（冲突解决）、History（变更记录）、Recover（崩溃恢复）。
+
+多 Agent 同时操作同一份 state 时，State Manager 是唯一真相源（single source of truth）。
+
+## Event Bus
+
+不轮询 State，消费 Event：KnowledgeIngested / PlannerCompleted / TaskFailed / NewSourceDetected / ConflictFound。
+
+## Protocol 格式决策
+
+- State：JSON（高频程序读写，需要 schema 校验）
+- Protocol：YAML（人+AI 可读，低频修改）
+- Config：TOML（可选，生态依赖）
+关键设计决策
 
 - Planner 不是 Runtime 的居民，而是 Layer 2 的执行引擎
 - EVR 不是第七层，而是横向元过程，贯穿所有层
