@@ -1,0 +1,19 @@
+﻿# Large files
+*.pdf
+
+# OS junk
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temp files
+*.tmp
+*.swp
+*~
+
+# Codex
+.codex/
+
+# Python cache
+__pycache__/
+*.pyc
