@@ -1,4 +1,20 @@
-## [2026-07-08] upgrade | Harness 工程吸收——协议升级
+## [2026-07-10] evolve | Wiki 进化大讨论——AI Wiki → Agent Runtime v0.1
+- 系统定位升级：从 AI 可读的知识库 到 Agent 可运行的执行环境
+- 核心方法论：EVR（Extraction → Validation → Refinement）
+- 架构设计：七层架构（Vision → Ontology → Runtime → Knowledge+Capability → Planner → Application → Interface）
+- 本体论：Runtime Object 识别规则（寻址 + 状态查询 + 执行操作）
+- 关键分离：State（瞬时）vs Memory（不可变），Knowledge（对象）vs Capability（动作）
+- 新建 6 篇知识页：Agent Runtime v0.1、EVR 方法论、Runtime Object 识别规则、七层架构、State 与 Memory 的分离、Schema Extraction 方法
+- 开发路线：Phase 0（Schema Extraction）→ Phase 1（State Runtime）→ Phase 2（Knowledge+Capability）→ Phase 3（Planner+Application）
+- GitHub 备份：[ruiyaoe-hash/my-wiki](https://github.com/ruiyaoe-hash/my-wiki)，227 文件，public
+- hot.md / index.md / README.md 同步更新
+
+﻿
+## [2026-07-10] backup | GitHub 完整备份
+- 仓库：[ruiyaoe-hash/my-wiki](https://github.com/ruiyaoe-hash/my-wiki)
+- 内容：227 文件，545 KB，213 文件 + 1 bootstrap + Obsidian 配置
+- 状态：public，main 分支，已验证远程树完整性
+- 注意：源/原文/ 中 14.2MB PDF 已通过 .gitignore 排除## [2026-07-08] upgrade | Harness 工程吸收——协议升级
 - wrapup-protocol.md：六步→七步，新增第7步"剪枝 (Prune)"，借鉴 Claude Code Dream 系统
 - 新建 agents/踩坑集.md：失败模式记录模板，目标积累20条后做模式分析
 - AGENTS.md：新增"场景→技能链"映射表（6个高频场景 + 对应协议链）

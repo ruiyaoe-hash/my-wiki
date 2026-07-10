@@ -185,6 +185,13 @@
   },
   "active": "1df2ab4cd4d03a59",
   "lastOpenFiles": [
+    "知识库/Schema Extraction 方法.md",
+    "知识库/State 与 Memory 的分离.md",
+    "知识库/Agent Runtime 七层架构.md",
+    "知识库/Runtime Object 识别规则.md",
+    "知识库/EVR 方法论.md",
+    "知识库/Agent Runtime v0.1.md",
+    "_write_pages.py",
     "_update_signals.py",
     "_log_update.py",
     "知识库/Harness 工程对我们的启示.md",
@@ -211,16 +218,9 @@
     "归档/日志/2026-06-log.md",
     "归档/暂存归档/硅基流动_横纵分析报告.pdf",
     "归档/暂存归档/硅基流动_横纵分析报告.md",
-    "归档/暂存归档",
     "源/原文/workflows.md",
     "源/原文/routines.md",
     "源/原文/goal.md",
-    "源/原文/agents.md",
-    "源/原文/2026-07-08-claude-code-loops-wechat.md",
-    "源/原文/staging-archive/硅基流动_横纵分析报告.pdf",
-    "源/原文/staging-archive/硅基流动_横纵分析报告.md",
-    "源/原文/openrath-examples/OpenRath_example_README.md",
-    "源/原文/openrath-examples/OpenRath_CONTRIBUTING.md",
     "_test_img.jpg"
   ]
 }
