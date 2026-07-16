@@ -1,3 +1,8 @@
+## [2026-07-16] docs | CHANGELOG.md 替代迁移标记文件
+- 删除 migration-plan.md + 3 个 _MIGRATION_NOTICE.md
+- 新建 CHANGELOG.md：v0.0.0-wiki → v0.0.0 → v0.1.0 → Unreleased 完整版本历史
+- 原则：版本变化写在 CHANGELOG 里，旧版通过 git checkout v0.0-wiki 恢复
+
 ## [2026-07-16] plan | 目录迁移计划 + 旧目录标记
 - migration-plan.md：旧→新目录映射表 + 迁移时间表 + 检查清单
 - 知识库/_MIGRATION_NOTICE.md、源/_MIGRATION_NOTICE.md、agents/_MIGRATION_NOTICE.md：迁移标记
