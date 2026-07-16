@@ -1,3 +1,17 @@
+## [2026-07-16] build | Phase 1 完成——State Runtime v0.1
+
+### 新建
+- state/ 4 个 JSON 文件（schema + session + task-queue + current-task）
+- state-manager/manager.py（lock/validate/merge/history/recover）
+- policy.md（Agent 权限矩阵 v0.1）
+
+### 修改
+- hot.md：TODO 迁移到 state，只保留 Memory
+- AGENTS.md：新增 State 层说明
+
+### 验证
+- State Manager 全部 5 个操作测试通过
+
 ## [2026-07-16] evolve | Phase 0 完成——Ontology v0.1
 
 ### Step 0a：Perspective + Object Rule

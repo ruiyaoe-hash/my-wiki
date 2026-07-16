@@ -9,7 +9,7 @@ updated: 2026-07-08
 # 近期上下文
 
 ## 知识库当前状态
-- 80 篇知识库（70 概念页 + 10 MOC 页）+ ontology/ 目录（3 文件）
+- 80 篇知识库 + state/ + state-manager/ + ontology/ + policy.md
 - 3 域 MOC：Agent 记忆与认知 / Agent 系统工程 / 知识管理
 - 7 子 MOC：记忆系统 / 认知机制 / Agent 架构与协作 / 工具与模式 / PKM 方法论 / Wiki 工程 / 行业观察
 - 55 个标签（29 英/26 中）
@@ -49,11 +49,15 @@ updated: 2026-07-08
 - GitHub 仓库创建并推送：[ruiyaoe-hash/my-wiki](https://github.com/ruiyaoe-hash/my-wiki)
 - README.md 重写为 AI 助手快速说明书
 
-### 下次会话约定
-- P0：Phase 1 启动——建 state/ + state-manager/ + policy.md
-- P0：hot.md 拆分为 State + Memory
-- P1：更新 AGENTS.md 对接新架构
-- 定位：Agent Runtime v0.1，Phase 0 完成，进入 Phase 1
+
+
+## State 层已分离
+
+从 Phase 1 开始，TODO/进度/当前任务不再存在 hot.md 中。
+这些瞬时信息现在以 JSON 格式存储在 state/ 目录下，由 State Manager 统一管理。
+
+hot.md 从现在开始只保留不可变的 Memory：已发生的事件记录。
+
 ## 用户偏好确认
 - 中文优先，大白话（小学可理解）
 - 来源必须附带 URL + 一句话概括

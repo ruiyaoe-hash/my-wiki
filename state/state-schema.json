@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Runtime State Schemas",
+  "description": "Phase 1 state layer data schemas. These define the structure, not the values.",
+  "current-task": {
+    "description": "The actively running task. Only ONE task at a time per agent.",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "description": "Unique task identifier"
+      },
+      "task_type": {
+        "type": "string",
+        "description": "research|compare|ingest|review|check"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "created",
+          "running",
+          "paused",
+          "completed",
+          "failed"
+        ]
+      },
+      "current_step": {
+        "type": "integer",
+        "description": "Which step (1-based)"
+      },
+      "total_steps": {
+        "type": "integer",
+        "description": "Total steps in this task"
+      },
+      "progress": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "0.0 to 1.0"
+      },
+      "owner_agent": {
+        "type": "string",
+        "description": "Which agent holds this task"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "updated_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "context": {
+        "type": "object",
+        "description": "Task-specific data (URLs, keywords, etc.)"
+      }
+    }
+  },
+  "task-queue": {
+    "description": "Pending tasks waiting to be executed",
+    "properties": {
+      "tasks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "task_id": {
+              "type": "string"
+            },
+            "task_type": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "description": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    }
+  },
+  "session": {
+    "description": "Current session metadata",
+    "properties": {
+      "session_id": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "active",
+          "ended"
+        ]
+      },
+      "agent": {
+        "type": "string",
+        "description": "Which agent is running this session"
+      },
+      "started_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "ended_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date-time"
+      },
+      "task_count": {
+        "type": "integer",
+        "description": "Tasks completed this session"
+      }
+    }
+  }
+}
