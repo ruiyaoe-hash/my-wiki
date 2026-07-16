@@ -9,7 +9,7 @@ updated: 2026-07-08
 # 近期上下文
 
 ## 知识库当前状态
-- 80 篇知识库（70 概念页 + 10 MOC 页）
+- 80 篇知识库（70 概念页 + 10 MOC 页）+ ontology/ 目录（3 文件）
 - 3 域 MOC：Agent 记忆与认知 / Agent 系统工程 / 知识管理
 - 7 子 MOC：记忆系统 / 认知机制 / Agent 架构与协作 / 工具与模式 / PKM 方法论 / Wiki 工程 / 行业观察
 - 55 个标签（29 英/26 中）
@@ -50,12 +50,10 @@ updated: 2026-07-08
 - README.md 重写为 AI 助手快速说明书
 
 ### 下次会话约定
-- P0：Step 0a — 写 perspective.md + object-rule.md
-- P0：Step 0b — Object Discovery
-- P0：Step 0c — Ontology v0.1（对象定义，不含 Schema）
-- P1：Phase 1 启动——建 state/ + state-manager/
-- 定位已变：从 My Wiki v2 到 Agent Runtime v0.1
-
+- P0：Phase 1 启动——建 state/ + state-manager/ + policy.md
+- P0：hot.md 拆分为 State + Memory
+- P1：更新 AGENTS.md 对接新架构
+- 定位：Agent Runtime v0.1，Phase 0 完成，进入 Phase 1
 ## 用户偏好确认
 - 中文优先，大白话（小学可理解）
 - 来源必须附带 URL + 一句话概括
