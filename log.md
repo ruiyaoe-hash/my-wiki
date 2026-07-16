@@ -1,3 +1,10 @@
+## [2026-07-16] ingest | HMS GitHub 仓库深度分析
+- 源/原文/hms-readme-en.md、hms-readme-zh.md：英文/中文 README 原文
+- 源/原文/hms-longmemeval-benchmark.py：LongMemEval 基准测试实现
+- 知识库/HMS 全息记忆系统——深度源码分析.md：完整对象模型 + 架构分层 + 评估框架 + 与我们的对照表
+- 关键发现：Go SDK 暴露了 100+ model 文件，包含 Bank/Document/Entity/Directive/MentalModel/Consolidation/Operation/AuditLog 等完整对象体系
+- hms-embed CLI 已经是产品级记忆层，直接集成 Claude Code/Cursor/Windsurf
+
 ## [2026-07-16] ingest | Shadoweave HMS 全息记忆系统入库
 - 源/原文/shadoweave-hms-wechat.md：新智元报道原文（6054 字）
 - 源/摘要/shadoweave-hms-summary.md：AI 摘要
