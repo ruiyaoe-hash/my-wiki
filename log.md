@@ -1,3 +1,8 @@
+## [2026-07-16] plan | 目录迁移计划 + 旧目录标记
+- migration-plan.md：旧→新目录映射表 + 迁移时间表 + 检查清单
+- 知识库/_MIGRATION_NOTICE.md、源/_MIGRATION_NOTICE.md、agents/_MIGRATION_NOTICE.md：迁移标记
+- 原则：不删旧文件、不跨 Phase 迁移、Obsidian 兼容性优先
+
 ## [2026-07-16] build | Phase 1 完成——State Runtime v0.1
 
 ### 新建
