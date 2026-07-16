@@ -1,3 +1,9 @@
+## [2026-07-16] wrapup | 会话收尾
+- state/session.json：状态标记为 ended
+- state/current-task.json：标记为 completed
+- state/task-queue.json：清空
+- hot.md：追加本次会话成果 Memory（HMS 分析 + Phase 0+1 完成）
+
 ## [2026-07-16] docs | CHANGELOG.md 替代迁移标记文件
 - 删除 migration-plan.md + 3 个 _MIGRATION_NOTICE.md
 - 新建 CHANGELOG.md：v0.0.0-wiki → v0.0.0 → v0.1.0 → Unreleased 完整版本历史

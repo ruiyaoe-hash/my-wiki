@@ -1,12 +1,14 @@
 {
   "task_id": null,
   "task_type": null,
-  "status": "idle",
+  "status": "completed",
   "current_step": 0,
   "total_steps": 0,
-  "progress": 0.0,
+  "progress": 1.0,
   "owner_agent": "Codex",
   "created_at": null,
-  "updated_at": "2026-07-16T00:00:00Z",
-  "context": {}
+  "updated_at": "2026-07-16T23:59:00Z",
+  "context": {
+    "summary": "Phase 0+1 全部完成"
+  }
 }
