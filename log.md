@@ -1,3 +1,10 @@
+## [2026-07-16] ingest | Shadoweave HMS 全息记忆系统入库
+- 源/原文/shadoweave-hms-wechat.md：新智元报道原文（6054 字）
+- 源/摘要/shadoweave-hms-summary.md：AI 摘要
+- 知识库/HMS 全息记忆系统.md：知识页（核心概念 + 与我们项目的对照表）
+- 核心验证：留存/回忆分离 = State/Memory 分离；五动词协议 = Protocol API化；自进化 = EVR
+- GitHub：Shadow-Weave/HMS
+
 ## [2026-07-10] evolve | Wiki 进化大讨论——AI Wiki → Agent Runtime v0.1
 - 系统定位升级：从 AI 可读的知识库 到 Agent 可运行的执行环境
 - 核心方法论：EVR（Extraction → Validation → Refinement）
