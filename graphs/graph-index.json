@@ -1,30 +1,30 @@
 {
-  "title": "Graph Index ? ?? Graph ??",
-  "description": "Agent Runtime ??? Graph ?? Runtime ????",
+  "title": "Graph Index — 四图索引",
+  "description": "Agent Runtime 的四张 Graph 及 Runtime 使用方式",
   "graphs": {
     "dependency": {
       "file": "graphs/dependency.json",
-      "description": "??/???????????????????????????",
-      "status": "schema-defined",
-      "edge_relation": "A?B = A depends on B"
+      "description": "知识/协议/源材料之间的派生与依赖关系",
+      "status": "data-ready",
+      "edge_relation": "A→B = A depends on B"
     },
     "knowledge": {
       "file": "graphs/knowledge.json",
-      "description": "?????? wikilink ????? sidecars ??? outgoing_links??",
-      "status": "data-ready (sidecars ?? outgoing_links)",
-      "edge_relation": "A?B = A links to B"
+      "description": "知识页之间 wikilink 引用关系（数据来源 sidecar 的 outgoing_links）",
+      "status": "data-ready (sidecars → outgoing_links)",
+      "edge_relation": "A→B = A links to B"
     },
     "capability": {
       "file": "graphs/capability.json",
-      "description": "??/???????????Phase 2 ?????",
+      "description": "能力/协议之间的组成与前置关系（Phase 2 规划）",
       "status": "planned",
-      "edge_relation": "A?B = A ?? B ????"
+      "edge_relation": "A→B = A 由 B 组成/前置"
     },
     "workflow": {
       "file": "graphs/workflow.json",
-      "description": "Protocol ???????Phase 2.4 ? YAML ??????",
+      "description": "Protocol 步骤之间的执行顺序（由 protocol/*.json 的步骤定义生成）",
       "status": "planned",
-      "edge_relation": "A?B = Step A ??? Step B"
+      "edge_relation": "A→B = 步骤 A 先于步骤 B"
     }
   }
 }

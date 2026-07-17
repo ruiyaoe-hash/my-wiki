@@ -78,7 +78,8 @@
 - 仓库：[ruiyaoe-hash/my-wiki](https://github.com/ruiyaoe-hash/my-wiki)
 - 内容：227 文件，545 KB，213 文件 + 1 bootstrap + Obsidian 配置
 - 状态：public，main 分支，已验证远程树完整性
-- 注意：源/原文/ 中 14.2MB PDF 已通过 .gitignore 排除## [2026-07-08] upgrade | Harness 工程吸收——协议升级
+- 注意：源/原文/ 中 14.2MB PDF 已通过 .gitignore 排除
+## [2026-07-08] upgrade | Harness 工程吸收——协议升级
 - wrapup-protocol.md：六步→七步，新增第7步"剪枝 (Prune)"，借鉴 Claude Code Dream 系统
 - 新建 agents/踩坑集.md：失败模式记录模板，目标积累20条后做模式分析
 - AGENTS.md：新增"场景→技能链"映射表（6个高频场景 + 对应协议链）
@@ -251,3 +252,20 @@
 
 
 
+
+## 2026-07-17 | Phase 3 完成 + v1.0.1 发布
+
+### 本次成果
+- Phase 3: Event Bus（15 种事件类型）+ Memory Store L0-L4 五层 + Planner + Dependency Graph（81 节点 380 边）+ WikiAgent 全部落地
+- v1.0: ingest 协议全链路实现（5 步）+ Memory L3-L4 + Executor v0.2（10 个 handler）+ Protocol 模板 + README 重写
+- Review: ontology v0.2 / manager.py merge_conflict_handler / AGENTS.md 修正
+- 仓库清理: 325 → 38 文件，纯运行时
+- 文档: README + CHANGELOG + source/README
+- 恢复: checkout main + merge 事故导致本地文件丢失，已通过 git worktree 恢复
+- 定位: Agent Runtime（主）/ Agent OS（愿景）
+
+### 当前状态
+- main: v1.0.1 已发布，38 文件纯运行时
+- develop: 继续开发
+- v1.0.1 tag: 已推送
+- [2026-07-17T14:16:44.089485+00:00] wrapup: 会话 2026-07-17-003（ended），任务 (无)（completed）

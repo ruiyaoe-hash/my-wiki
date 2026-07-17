@@ -1,8 +1,8 @@
 {
-  "session_id": "2026-07-17-003",
+  "session_id": "wiki-2026-07-17-231112-01",
   "status": "ended",
   "agent": "Codex",
   "started_at": "2026-07-17T02:10:00Z",
-  "ended_at": null,
-  "task_count": 2
+  "ended_at": "2026-07-17T07:07:25.045994+00:00",
+  "task_count": 3
 }

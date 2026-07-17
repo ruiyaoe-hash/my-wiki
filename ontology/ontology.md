@@ -1,4 +1,4 @@
-﻿# Ontology v0.1 — Agent Runtime 一等对象定义
+# Ontology v0.1 — Agent Runtime 一等对象定义
 
 > 本文件为 Phase 0 产物。只定义对象边界（是什么、谁管、谁用、活多久），
 > 不定义 Schema（内部属性）。Schema 在 Phase 1 落地后从实践中萃取。
@@ -123,5 +123,6 @@
 
 ## 版本记录
 
+- v0.3（2026-07-17）：引入 ontology/catalog.json 动态目录——本文件保持为稳定定义（对象边界不变）；catalog.json 是动态目录，对象的新增/废弃/激活先改 catalog，定期同步回本文件。本次同步事件：Graph 由 reserved 激活为 active（依赖图落盘 graphs/dependency.json）。
 - v0.2（2026-07-17）：Review 修正——Memory Owner 更正、Session/State 边界明确、Protocol 当前位置如实反映、Event 定位升级为核心组件、Graph 新增为第 9 号预留对象。
 - v0.1（2026-07-16）：Phase 0 初始版本。7 个确认对象 + 1 个预留对象。不含 Schema。

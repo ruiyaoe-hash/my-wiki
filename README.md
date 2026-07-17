@@ -44,6 +44,17 @@ graphs/     图结构 - 知识关系定义
 
 **无行业锁定，一切可插拔。** / No domain-specific code. Everything is pluggable.
 
+## 开发 / Development
+
+```bash
+python -m unittest discover tests      # 运行测试套件（29 用例）
+python scripts/build_graph.py          # 从 sidecar 重建依赖图
+python scripts/rebuild_sidecars.py     # 从 md frontmatter 重建 sidecar
+python agents/wiki-agent.py --loop 10 --interval 60   # 多轮自动运行
+```
+
+每个组件的公开接口见对应目录下的 `INTERFACE.md`。/ Public interfaces: see `INTERFACE.md` in each component directory.
+
 ---
 
 # 项目起源：My Wiki 说明书 / Project Origin: My Wiki Manual
@@ -98,4 +109,4 @@ graphs/     图结构 - 知识关系定义
 
 ---
 
-当前版本: v1.0.1 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)
+当前版本: v1.1.0 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

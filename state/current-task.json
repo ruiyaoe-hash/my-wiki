@@ -1,5 +1,5 @@
 {
-  "task_id": "wiki-check-001",
+  "task_id": "wiki-2026-07-17-231112-check-01",
   "task_type": "check",
   "status": "completed",
   "current_step": 0,
@@ -7,13 +7,14 @@
   "progress": 1.0,
   "owner_agent": "Planner",
   "context": {
-    "task_id": "wiki-check-001",
+    "task_id": "wiki-2026-07-17-231112-check-01",
     "task_type": "check",
     "priority": 1,
     "description": "Wiki lint check: stale pages and broken links",
-    "created_at": "2026-07-17T03:00:00Z",
+    "created_at": "2026-07-17T23:11:12.557261",
     "context": {
-      "scope": "knowledge"
+      "scope": "knowledge",
+      "summary": "wiki-agent 例行检查 第 1 轮"
     }
   }
 }

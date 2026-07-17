@@ -1,10 +1,10 @@
 {
   "protocol_id": "check",
   "version": "1.0.0",
-  "description": "???????/???/stale/??",
+  "description": "检查知识库断链/孤儿页/stale/矛盾等问题",
   "triggers": {
     "keywords": [
-      "??",
+      "检查",
       "lint",
       "check"
     ]
@@ -17,16 +17,16 @@
         "dir": "knowledge/",
         "pattern": "*.json"
       },
-      "description": "???? sidecar"
+      "description": "扫描所有 sidecar"
     },
     {
       "id": 2,
       "action": "search_files",
       "params": {
-        "dir": "???/",
+        "dir": "知识库/",
         "pattern": "*.md"
       },
-      "description": "???????"
+      "description": "扫描知识库所有页面"
     },
     {
       "id": 3,
@@ -35,7 +35,7 @@
         "field": "updated",
         "threshold_days": 90
       },
-      "description": "?? stale ?"
+      "description": "检测 stale 页面"
     },
     {
       "id": 4,
@@ -43,7 +43,7 @@
       "params": {
         "output": "reports/check-{date}.md"
       },
-      "description": "????"
+      "description": "生成检查报告"
     }
   ],
   "raw_source": "agents/check-protocol.md"

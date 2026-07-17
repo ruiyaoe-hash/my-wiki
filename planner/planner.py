@@ -9,6 +9,7 @@ Responsibilities:
 """
 
 import sys, os, json
+from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
@@ -43,6 +44,20 @@ class Planner:
         self.memory = MemoryStore()
         self.current_session = None
 
+    def _update_execution_status(self, **fields):
+        """Merge-update state/execution-status.json, preserving counters."""
+        current = self.sm.read('execution-status.json') or {}
+        updates = {
+            'status': current.get('status', 'idle'),
+            'last_run': current.get('last_run'),
+            'tasks_processed': current.get('tasks_processed', 0),
+            'sessions_total': current.get('sessions_total', 0),
+        }
+        updates.update(fields)
+        if updates['last_run'] is None:
+            updates['last_run'] = datetime.now(timezone.utc).isoformat()
+        return self.sm.merge('execution-status.json', updates, 'Planner')
+
     def start_session(self, session_id=None):
         """Start a new session."""
         session = self.sm.read('session.json') or {}
@@ -51,11 +66,14 @@ class Planner:
         self.sm.write('session.json', session, 'Planner')
         self.current_session = session['session_id']
 
+        self._update_execution_status(
+            status='active', last_run=datetime.now(timezone.utc).isoformat())
+
         self.bus.emit(Event(EventTypes.SESSION_STARTED,
                            {'session_id': self.current_session}, source='Planner'))
         return self.current_session
 
-    def end_session(self):
+    def end_session(self, tasks_completed=0):
         """End current session and archive all tasks."""
         session = self.sm.read('session.json')
         if session:
@@ -65,6 +83,12 @@ class Planner:
         task = self.sm.read('current-task.json')
         if task and task.get('task_id'):
             self.memory.archive_task(task, self.current_session)
+
+        current = self.sm.read('execution-status.json') or {}
+        self._update_execution_status(
+            status='idle',
+            tasks_processed=current.get('tasks_processed', 0) + tasks_completed,
+            sessions_total=current.get('sessions_total', 0) + 1)
 
         self.bus.emit(Event(EventTypes.SESSION_ENDED,
                            {'session_id': self.current_session}, source='Planner'))
@@ -133,9 +157,9 @@ class Planner:
                            {'protocol': protocol_id, 'success': ok}, source='Planner'))
         return ok
 
-    def run_loop(self, max_tasks=5):
+    def run_loop(self, max_tasks=5, session_id=None):
         """Main loop: process up to max_tasks from queue."""
-        self.start_session()
+        self.start_session(session_id=session_id)
         completed = 0
         for _ in range(max_tasks):
             task = self.execute_next_task()
@@ -143,7 +167,7 @@ class Planner:
                 break
             if self.run_task(task):
                 completed += 1
-        self.end_session()
+        self.end_session(tasks_completed=completed)
 
         # Persist event history
         self.bus.persist()

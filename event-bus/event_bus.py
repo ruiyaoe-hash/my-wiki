@@ -46,6 +46,7 @@ class EventBus:
     def __init__(self):
         self._subscribers = {}   # event_type -> [handler]
         self._history = []       # all emitted events
+        self._persisted_counts = {}  # resolved filepath -> # events already written
 
     def subscribe(self, event_type, handler):
         """Register a handler for an event type. Handler receives Event object."""
@@ -79,17 +80,49 @@ class EventBus:
         return [e.to_dict() for e in events[-limit:]]
 
     def persist(self, filepath=None):
-        """Save event history to disk."""
+        """Append new events to the jsonl history file.
+
+        Only events emitted since the last persist() to the same file are
+        written, so repeated calls never duplicate lines. Returns the path.
+        """
         path = Path(filepath) if filepath else HISTORY_DIR / 'events.jsonl'
-        with open(path, 'w', encoding='utf-8') as f:
-            for event in self._history:
-                f.write(json.dumps(event.to_dict(), ensure_ascii=False) + '\n')
+        key = str(path.resolve())
+        start = self._persisted_counts.get(key, 0)
+        new_events = self._history[start:]
+        if new_events:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, 'a', encoding='utf-8') as f:
+                for event in new_events:
+                    f.write(json.dumps(event.to_dict(), ensure_ascii=False) + '\n')
+        self._persisted_counts[key] = len(self._history)
         return str(path)
+
+    def load_history(self, filepath=None):
+        """Read events back from a jsonl history file (offline queries).
+
+        Returns a list of event dicts; missing file -> empty list.
+        Blank or malformed lines are skipped.
+        """
+        path = Path(filepath) if filepath else HISTORY_DIR / 'events.jsonl'
+        if not path.exists():
+            return []
+        events = []
+        with open(path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    events.append(json.loads(line))
+                except json.JSONDecodeError:
+                    continue
+        return events
 
     def clear(self):
         """Clear all subscribers and history."""
         self._subscribers.clear()
         self._history.clear()
+        self._persisted_counts.clear()
 
 
 # Singleton for the whole Runtime

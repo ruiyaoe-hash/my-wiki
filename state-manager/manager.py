@@ -1,4 +1,4 @@
-﻿# State Manager v0.1
+# State Manager v0.1
 # Thin layer for multi-agent state coordination.
 # Responsibilities: lock, validate, read/write, merge, history, recover.
 
@@ -84,6 +84,8 @@ class StateManager:
             return "tasks" in data and isinstance(data["tasks"], list)
         if filename == "session.json":
             return all(k in data for k in ["session_id","status","agent"])
+        if filename == "execution-status.json":
+            return all(k in data for k in ["status","tasks_processed"])
         return True
 
     def merge(self, filename, updates, agent_id, base_version=None):

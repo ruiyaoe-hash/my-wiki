@@ -1,0 +1,89 @@
+{
+  "catalog_version": "v0.3",
+  "updated": "2026-07-17",
+  "source_of_truth": "ontology/ontology.md 是稳定定义（对象边界不变）；本文件是动态目录——对象的新增/废弃/激活先改本文件，定期同步回 ontology.md",
+  "objects": [
+    {
+      "id": "knowledge",
+      "name": "知识",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Knowledge Engine（Phase 2 实现，当前手动管理）",
+      "consumer": "Planner / Application Agent / Human"
+    },
+    {
+      "id": "source",
+      "name": "源材料",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Knowledge Engine（Phase 2 实现，当前手动操作）",
+      "consumer": "Knowledge（来源引用）/ Agent（验证原始依据）"
+    },
+    {
+      "id": "memory",
+      "name": "记忆",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Memory Store",
+      "consumer": "Agent（恢复上下文）/ Human（回顾历史）/ EVR Extraction（模式发现）"
+    },
+    {
+      "id": "state",
+      "name": "状态",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "State Store",
+      "consumer": "Planner（判断下一步）/ Agent（恢复执行）"
+    },
+    {
+      "id": "session",
+      "name": "会话",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Session Manager（State Store 的一部分）",
+      "consumer": "Agent / EVR（萃取模式）/ Human"
+    },
+    {
+      "id": "protocol",
+      "name": "协议",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Protocol Registry（Phase 2 实现，当前手动维护）",
+      "consumer": "Planner（选择协议）/ Agent（执行步骤）"
+    },
+    {
+      "id": "task",
+      "name": "任务",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Task Engine（State Store 的一部分）",
+      "consumer": "Planner（编排执行）/ Agent（执行操作）/ Human"
+    },
+    {
+      "id": "event",
+      "name": "事件",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-16",
+      "owner": "Event Bus",
+      "consumer": "Planner（监听驱动下一步）/ EVR（异常模式触发 Extraction）"
+    },
+    {
+      "id": "graph",
+      "name": "图",
+      "version": "v0.2",
+      "status": "active",
+      "since": "2026-07-17",
+      "owner": "Knowledge Engine（Phase 2 实现）",
+      "consumer": "Planner（路由决策）/ Agent（技能链选择）/ EVR（结构模式发现）",
+      "note": "2026-07-17 依赖图落盘（graphs/dependency.json），Graph 对象正式激活"
+    }
+  ]
+}

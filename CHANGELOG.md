@@ -1,19 +1,50 @@
-# Changelog / ????
+# Changelog / 变更日志
 
-All notable changes / ?????? to this project will be documented in this file.
+All notable changes / 所有显著变更 to this project will be documented in this file.
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 ---
 
-## [Unreleased] — develop 分支
+## [1.1.0] — 2026-07-17
+
+名实对齐 + 真实验收 + 文档裁决一轮。所有条目均有运行证据。
+
+### Fixed
+- 编码事故修复：protocol/*.json、graphs/graph-index.json、migration/migrate.py、CHANGELOG、log.md 的中文乱码全部修复；check 协议步骤 2 目录恢复为 知识库/
+- MemoryStore：record_type 丢失 bug（所有记录退化为 note）+ metadata 嵌套修正
+- Executor：缺失 handler 由静默 SKIP 改为 fail-fast（杜绝协议假成功）
+- wrapup 协议第 4 步：write 全量覆写改为 update 合并（不再被 validate 静默拒绝）
+- metadata-schema.json 与 dependency-graph-schema.json 的 `$schema` 键修复
+
+### Added
+- Executor 5 个新 handler：update_hot_md / append_log / write_next_plan / check_threshold / emit_warning；`{date}` 模板变量；可插拔 LLM 摘要接口（AGENT_RUNTIME_LLM_*，默认提取式摘要）
+- tests/：unittest 套件 29 用例全绿（state/event-bus/memory/executor/planner/schema）
+- scripts/：rebuild_sidecars.py、validate_sidecars.py、build_graph.py、demo_recovery.py、run_real_ingest.py
+- Observability：event-bus persist 改追加模式 + load_history；state/execution-status.json（Planner 实时更新）
+- wiki-agent：`--loop N --interval S --recover` 多轮运行与崩溃恢复（10 轮无人工干预 + 恢复演示 PASS）
+- ontology/catalog.json：动态对象目录；Graph 对象 reserved → active
+- 5 个组件 INTERFACE.md（state-manager/event-bus/memory/executor/planner）
+
+### Changed
+- sidecar 全部重建（84 个）：md frontmatter 为唯一事实源；metadata-schema 枚举对齐真实词汇
+- graphs/dependency.json 真实落盘：113 节点 286 边（取代此前未持久化的 81/380 说法）
+- ingest 协议：知识页落入 知识库/，自动携带 source 回链（符合入库铁律）
+- 七层架构：Planner 归 Layer 2 执行引擎（六层）；Protocol 格式定稿 JSON（弃 YAML，零依赖原则）
+- policy.md 权限矩阵覆盖全部组件目录；真实 ingest 端到端入库（Engram 企业级记忆层）
+
+---
+
+## [1.0.2] — 2026-07-17（含 v1.0.1 开源发布与编码修复线）
+
+（原 [Unreleased] 段落实为 v1.0/v1.0.1/v1.0.2 的发布内容）
 
 ### Added (v0.2.0 计划)
 
 - Knowledge Engine（knowledge/ + source/）
 - 四种 Graph（Knowledge/Capability/Workflow/Dependency）
-- Protocol 从 Markdown 升级为 YAML
+- Protocol 从 Markdown 升级为 JSON（原拟 YAML，v1.1.0 定稿 JSON）
 - Memory 五层架构（Working/Session/Project/Semantic/Archive）
 
 ### Added — 2026-07-17 Phase 2
@@ -32,7 +63,7 @@ All notable changes / ?????? to this project will be documented in this file.
 - event-bus/event_bus.py：15 种事件类型的 pub/sub 总线 + history + persist
 - memory/memory_store.py：五层记忆 L0-L4（Working/Session/Project/Semantic/Archive）
 - planner/planner.py：动态编排引擎（dequeue → match → execute → archive）
-- graphs/dependency.json：81 节点 380 边的实际依赖图数据
+- graphs/dependency.json：81 节点 380 边的依赖图（未持久化；v1.1.0 重新落盘为 113 节点 286 边）
 - agents/wiki-agent.py：首个通用 Wiki 维护 Agent（check + ingest）
 
 ### Added — 2026-07-17 v1.0 收尾

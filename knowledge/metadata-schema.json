@@ -1,56 +1,64 @@
 {
-  "": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Knowledge Page Metadata Sidecar",
-  "description": "Each markdown knowledge page has one JSON sidecar with this schema.",
-  "version": "0.1.0",
+  "description": "Each markdown knowledge page has one JSON sidecar with this schema. Sidecars are regenerated from md frontmatter by scripts/rebuild_sidecars.py (md frontmatter is the single source of truth).",
+  "version": "0.2.0",
+  "type": "object",
   "properties": {
     "knowledge_id": {
       "type": "string",
-      "description": "Unique ID, derived from filename slug"
+      "description": "Unique ID, derived from filename slug (lowercase, spaces -> underscores)"
     },
     "title": {
       "type": "string"
     },
     "path": {
       "type": "string",
-      "description": "Relative path from knowledge/ root"
+      "description": "Path to the source markdown file, relative to repo root (e.g. 知识库/xxx.md or knowledge/pages/xxx.md)"
     },
     "created": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date"
     },
     "updated": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date"
     },
     "type": {
-      "type": "string",
+      "type": ["string", "null"],
       "enum": [
-        "concept",
-        "method",
         "analysis",
+        "concept",
         "moc",
-        "review",
-        "roadmap"
+        "note",
+        "tracker",
+        null
       ]
     },
     "domain": {
-      "type": "string",
+      "type": ["string", "null"],
       "enum": [
-        "agent-memory",
-        "agent-engineering",
+        "agent-memory-cognition",
+        "agent-systems-engineering",
+        "ai-engineering",
+        "ai-talent",
         "knowledge-management",
         "meta",
-        "runtime"
+        null
       ]
     },
     "status": {
-      "type": "string",
+      "type": ["string", "null"],
       "enum": [
-        "evergreen",
+        "developing",
         "draft",
-        "stale",
-        "archived"
+        "evergreen",
+        "growing",
+        "live",
+        "mature",
+        "seed",
+        "stub",
+        null
       ]
     },
     "tags": {
@@ -59,39 +67,59 @@
         "type": "string"
       }
     },
+    "description": {
+      "type": "string",
+      "description": "One-line summary copied from md frontmatter (omitted when absent)"
+    },
     "source_refs": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "References to source/ IDs that this knowledge was derived from"
+      "description": "Merged from md frontmatter source/source_url: external references this knowledge was derived from"
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related pages declared in md frontmatter (may be wikilinks or plain page names), kept verbatim"
     },
     "dependencies": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "knowledge_ids this page depends on (for Dependency Graph)"
+      "description": "knowledge_ids this page depends on (for Dependency Graph); maintained manually, not derivable from md"
     },
     "outgoing_links": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "wikilinks found in this page (for Knowledge Graph)"
+      "description": "Page names of wikilinks found in the md body ([[page]], [[page|alias]], [[page#anchor]]), deduplicated (for Knowledge Graph)"
     },
     "freshness_score": {
       "type": "number",
       "minimum": 0,
       "maximum": 1,
-      "description": "1.0 = fresh (<30d), decays to 0 at 180d"
+      "description": "Computed from updated: <=90d = 1.0, 90-180d = 0.7, 180-365d = 0.4, >365d = 0.1; unparseable/missing date = 0.5"
     }
   },
   "required": [
     "knowledge_id",
     "title",
     "path",
+    "created",
+    "updated",
     "type",
-    "status"
+    "domain",
+    "status",
+    "tags",
+    "source_refs",
+    "related",
+    "dependencies",
+    "outgoing_links",
+    "freshness_score"
   ]
 }
