@@ -112,4 +112,4 @@ python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
 
 ---
 
-当前版本: v1.2.0 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)
+当前版本: v1.2.1 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

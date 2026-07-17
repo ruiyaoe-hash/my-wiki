@@ -9,6 +9,7 @@
 - [[🏠 知识管理]] — 知识怎么管、Wiki 怎么建（~15 页）
 
 ## 新入库
+- [[AI Agent 从记忆到自我进化综述]] — Agent Runtime 自动入库
 - [[Engram 企业级记忆层]] — Agent Runtime 自动入库
 - [[Integration Test]] — Agent Runtime 自动入库
 - [[Test Article]] — Agent Runtime 自动入库

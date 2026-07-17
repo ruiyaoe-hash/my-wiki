@@ -7,7 +7,25 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
-## [1.2.0] — 2026-07-17（开发中，未发布）
+## [1.2.1] — 2026-07-18
+
+首次 dogfood（真实 URL 入库 + 巡检）驱动的修复轮。
+
+### Fixed
+- ingest 抓取：改用浏览器 UA（微信等平台对爬虫 UA 返回 18KB 反爬桩页，实测修复后获取 3.6MB 完整页）；新增桩页检测警告（suspect_stub）
+- 摘要生成：HTML 输入先转纯文本（h1-h3 转 #/## 标记），修复"要点为空"
+- sidecar 生成：从页面 frontmatter 解析（此前 domain/tags/source 被硬编码值覆盖）；补 related 键对齐 schema
+
+### Added
+- check 协议第 4 步 `check_links`：断链检测（规则与 scripts/build_graph.py 一致）
+- 巡检报告升级：包含实际结果（stale 清单、断链清单），不再只有步骤状态
+- 回归测试 ×2（HTML 摘要、sidecar frontmatter）；测试总数 29 → 31
+
+已知限制：source 回链指向非 .md 原文（如 .html）时会被断链检测计为断链（误报），下一轮排除。
+
+---
+
+## [1.2.0] — 2026-07-17
 
 市场化工程化：让"任何人 clone/安装即可用"可验证。
 

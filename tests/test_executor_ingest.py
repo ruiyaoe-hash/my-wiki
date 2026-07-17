@@ -107,5 +107,57 @@ class TestExecutorIngest(unittest.TestCase):
         self.assertIn(f'- [[{TITLE}]] — Agent Runtime 自动入库', index)
 
 
+class TestExecutorHtmlAndSidecar(unittest.TestCase):
+    """Regression for URL-ingest dogfood findings (2026-07-18):
+    1. HTML input must be converted to text before summarizing
+       (raw HTML produced an empty 要点 section on a real WeChat article).
+    2. Sidecar must be parsed from the page's frontmatter, not hardcoded
+       defaults (domain/tags/source were previously overwritten).
+    """
+
+    def setUp(self):
+        # handlers 约定仓库内路径（return 值取相对仓库路径），临时目录放 reports/（已 gitignore）
+        self.tmp = Path(tempfile.mkdtemp(prefix='ingest-html-', dir=helpers.BASE_DIR / 'reports'))
+        self.html = self.tmp / 'article.html'
+        self.html.write_text(
+            '<!doctype html><html><head><style>body{color:red}</style>'
+            '<script>var x=1;</script></head><body>'
+            '<h1>测试文章标题</h1>'
+            '<h2>背景</h2><p>这是背景章节的第一句话。这是第二句话。</p>'
+            '<h2>方法</h2><p>方法章节内容在这里。还有更多细节。</p>'
+            '</body></html>', encoding='utf-8')
+        self.page = self.tmp / 'My_Test_Page.md'
+        self.page.write_text(
+            '---\ntitle: "My Test Page"\ncreated: "2026-07-18"\nupdated: "2026-07-18"\n'
+            'type: concept\ndomain: agent-memory-cognition\nstatus: draft\n'
+            'source: "some-source"\ntags:\n- alpha\n- beta\n---\n\n# My Test Page\n\n[[LinkA]]\n',
+            encoding='utf-8')
+        self.sum_out = self.tmp / 'sums'
+        self.sc_out = self.tmp / 'sc'
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_html_converted_before_summary(self):
+        ex = ProtocolExecutor()
+        ex._handle_generate_summary({'input_file': str(self.html), 'output_dir': str(self.sum_out)})
+        summary = (self.sum_out / 'article_summary.md').read_text(encoding='utf-8')
+        self.assertIn('**背景**', summary)
+        self.assertIn('**方法**', summary)
+        self.assertIn('这是背景章节的第一句话', summary)
+        points = summary.split('## 要点')[1]
+        self.assertNotIn('<', points)  # no HTML tags leak into 要点
+
+    def test_sidecar_parsed_from_frontmatter(self):
+        ex = ProtocolExecutor()
+        ex._handle_generate_sidecar({'page_path': str(self.page), 'output_dir': str(self.sc_out)})
+        sc = json.loads((self.sc_out / 'my_test_page.json').read_text(encoding='utf-8'))
+        self.assertEqual(sc['domain'], 'agent-memory-cognition')
+        self.assertEqual(sc['tags'], ['alpha', 'beta'])
+        self.assertEqual(sc['source_refs'], ['some-source'])
+        self.assertIn('related', sc)
+        self.assertEqual(sc['outgoing_links'], ['LinkA'])
+
+
 if __name__ == '__main__':
     unittest.main()

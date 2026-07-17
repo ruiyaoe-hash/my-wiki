@@ -8,6 +8,7 @@ skipping, so a protocol can no longer fake success.
 """
 import sys, os, json, re, urllib.request
 from datetime import datetime, date, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'state_manager'))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'event_bus'))
@@ -43,6 +44,43 @@ def llm_summarize(text):
     except Exception as e:
         print(f'  LLM summary failed, falling back to extractive: {e}')
         return None
+
+
+class _TextExtractor(HTMLParser):
+    """Minimal HTML→text converter (stdlib only). Strips script/style,
+    emits '# '/'## ' markers for h1/h2/h3 so downstream markdown-style
+    heading extraction works on converted pages."""
+    def __init__(self):
+        super().__init__()
+        self._skip = 0
+        self.parts = []
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style'):
+            self._skip += 1
+        elif tag == 'h1':
+            self.parts.append('\n# ')
+        elif tag in ('h2', 'h3'):
+            self.parts.append('\n## ')
+        elif tag in ('p', 'br', 'div', 'section', 'li', 'tr'):
+            self.parts.append('\n')
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style') and self._skip > 0:
+            self._skip -= 1
+        elif tag in ('p', 'div', 'section', 'li', 'tr', 'h1', 'h2', 'h3'):
+            self.parts.append('\n')
+    def handle_data(self, data):
+        if not self._skip:
+            self.parts.append(data)
+
+
+def html_to_text(html):
+    """Convert an HTML document to plain text with markdown-style headings."""
+    from html import unescape
+    parser = _TextExtractor()
+    parser.feed(html)
+    text = unescape(''.join(parser.parts))
+    lines = [re.sub(r'[ \t\xa0]+', ' ', ln).strip() for ln in text.splitlines()]
+    return '\n'.join(ln for ln in lines if ln)
 
 
 class ProtocolExecutor:
@@ -108,11 +146,41 @@ class ProtocolExecutor:
             task = sm.read('current-task.json') or {}
             return task.get('context') or {}
         return {'error': f'Unknown: {m}'}
+    def _handle_check_links(self, p):
+        """断链检测：sidecar 的 outgoing_links 指向不存在的 md 页面即为断链
+        （判定规则与 scripts/build_graph.py 一致：归一化后在全库 md stem 集合中查找）。"""
+        skip = {'.git', '.obsidian', '.agents', '__pycache__', 'node_modules'}
+        def norm(name): return name.split('/')[-1].strip().lower().replace(' ', '_')
+        md_stems = set()
+        for f in BASE_DIR.rglob('*.md'):
+            if any(part in skip for part in f.parts): continue
+            md_stems.add(norm(f.stem))
+        d = BASE_DIR / 'knowledge'; broken = []
+        for f in d.glob('*.json'):
+            if f.name == 'metadata-schema.json': continue
+            with open(f, 'r', encoding='utf-8') as fp: sc = json.load(fp)
+            for link in sc.get('outgoing_links', []):
+                if norm(link) not in md_stems:
+                    broken.append({'from': sc.get('knowledge_id', f.stem), 'link': link})
+        return {'broken_count': len(broken), 'broken_links': broken[:50]}
     def _handle_generate_report(self, p):
         output = p.get('output', 'reports/report.md')
         out_path = BASE_DIR / output; out_path.parent.mkdir(parents=True, exist_ok=True)
         lines = [f'# Report — {datetime.now(timezone.utc).isoformat()}', '']
-        for sid, r in self.state.items(): lines.append(f'- Step {sid}: {"OK" if r.get("success") else "FAIL"}')
+        for sid, r in self.state.items():
+            lines.append(f'## Step {sid}: {"OK" if r.get("success") else "FAIL"}')
+            res = r.get('result')
+            if isinstance(res, dict):
+                for k, v in res.items():
+                    if isinstance(v, list) and v and isinstance(v[0], dict):
+                        lines.append(f'- **{k}**（{len(v)} 条）:')
+                        for item in v[:20]:
+                            lines.append(f'  - {json.dumps(item, ensure_ascii=False)}')
+                    elif isinstance(v, list):
+                        lines.append(f'- {k}: {len(v)} 项')
+                    else:
+                        lines.append(f'- {k}: {v}')
+            lines.append('')
         with open(out_path, 'w', encoding='utf-8') as f: f.write('\n'.join(lines))
         return {'report_path': str(output)}
     def _handle_fetch_url(self, p):
@@ -122,18 +190,27 @@ class ProtocolExecutor:
             with open(src, 'r', encoding='utf-8') as f: content = f.read()
             with open(dest, 'w', encoding='utf-8') as f: f.write(content)
         elif url.startswith('http'):
-            req = urllib.request.Request(url, headers={'User-Agent': 'AgentRuntime/1.0'})
-            with urllib.request.urlopen(req, timeout=15) as resp: content = resp.read().decode('utf-8', errors='replace')
+            # 浏览器 UA：微信等平台会对非浏览器 UA 返回反爬桩页（dogfood 实测）
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'})
+            with urllib.request.urlopen(req, timeout=20) as resp: content = resp.read().decode('utf-8', errors='replace')
             fname = url.rstrip('/').split('/')[-1] or 'index'
             if not fname.endswith(('.md','.txt','.html','.json')): fname += '.html'
             dest = output_dir / fname
             with open(dest, 'w', encoding='utf-8') as f: f.write(content)
         else: raise ValueError(f'Unsupported: {url}')
-        return {'original_path': str(dest.relative_to(BASE_DIR)), 'size_chars': len(content)}
+        result = {'original_path': str(dest.relative_to(BASE_DIR)), 'size_chars': len(content)}
+        # 反爬桩页检测：http 抓取结果异常小时给出标记（不 fail，由调用方判断）
+        if url.startswith('http') and len(content) < 30000:
+            result['suspect_stub'] = True
+            print(f'  WARNING: 抓取结果仅 {len(content)} 字符，疑似反爬桩页或内容不全')
+        return result
     def _handle_generate_summary(self, p):
         input_file = BASE_DIR / p.get('input_file', ''); output_dir = BASE_DIR / p.get('output_dir', 'source/summaries/'); output_dir.mkdir(parents=True, exist_ok=True)
         if not input_file.exists(): raise FileNotFoundError(str(input_file))
         with open(input_file, 'r', encoding='utf-8') as f: content = f.read()
+        # HTML 输入先转纯文本（h1/h2/h3 转为 #/## 标记），否则提取式摘要无标题可抓
+        if input_file.suffix.lower() in ('.html', '.htm') or content.lstrip()[:15].lower().startswith(('<!doctype', '<html')):
+            content = html_to_text(content)
         wc = len(content.split())
         llm_text = llm_summarize(content)
         if llm_text is not None:
@@ -174,12 +251,47 @@ class ProtocolExecutor:
         page = f'---\ntitle: "{title}"\ncreated: "{today}"\nupdated: "{today}"\ntype: concept\ndomain: {domain}\nstatus: draft\n{source_fm}tags:\n{tags_s}\n---\n\n# {title}\n\n> Agent Runtime ingest 协议自动生成。\n{source_sec}'
         with open(dest, 'w', encoding='utf-8-sig') as f: f.write(page)
         return {'page_path': str(dest.relative_to(BASE_DIR)), 'title': title}
+    def _parse_frontmatter(self, content):
+        """Minimal frontmatter parser for our own page template
+        (key: value、引号字符串、块式/行内列表)。md 是唯一事实源。"""
+        fm = {}
+        m = re.match(r'^---\s*\n(.*?)\n---', content, re.S)
+        if not m: return fm
+        cur_key = None
+        for line in m.group(1).splitlines():
+            mm = re.match(r'^(\w[\w-]*):\s*(.*)$', line)
+            if mm:
+                cur_key = mm.group(1)
+                val = mm.group(2).strip().strip('"').strip("'")
+                if val.startswith('[') and val.endswith(']'):
+                    fm[cur_key] = [v.strip().strip('"').strip("'") for v in val[1:-1].split(',') if v.strip()]
+                elif val == '':
+                    fm[cur_key] = []
+                else:
+                    fm[cur_key] = val
+            elif line.strip().startswith('- ') and cur_key is not None:
+                if not isinstance(fm.get(cur_key), list): fm[cur_key] = []
+                fm[cur_key].append(line.strip()[2:].strip().strip('"').strip("'"))
+        return fm
     def _handle_generate_sidecar(self, p):
         page_path = BASE_DIR / p.get('page_path', ''); output_dir = BASE_DIR / p.get('output_dir', 'knowledge/'); output_dir.mkdir(parents=True, exist_ok=True)
         if not page_path.exists(): raise FileNotFoundError(str(page_path))
         with open(page_path, 'r', encoding='utf-8-sig') as f: content = f.read()
         links = list(set(re.findall(r'\[\[([^\]|#]+)(?:[#|][^\]]+)?\]\]', content)))
-        sc = {'knowledge_id': page_path.stem.replace(' ', '_').lower(), 'title': page_path.stem, 'path': str(page_path.relative_to(BASE_DIR)), 'created': date.today().isoformat(), 'updated': date.today().isoformat(), 'type': 'concept', 'domain': 'knowledge-management', 'status': 'draft', 'tags': [], 'source_refs': [], 'dependencies': [], 'outgoing_links': links, 'freshness_score': 1.0}
+        fm = self._parse_frontmatter(content)
+        today = date.today().isoformat()
+        sc = {'knowledge_id': page_path.stem.replace(' ', '_').lower(),
+              'title': fm.get('title') or page_path.stem,
+              'path': str(page_path.relative_to(BASE_DIR)),
+              'created': fm.get('created') or today,
+              'updated': fm.get('updated') or today,
+              'type': fm.get('type') or 'concept',
+              'domain': fm.get('domain') or 'knowledge-management',
+              'status': fm.get('status') or 'draft',
+              'tags': fm.get('tags') if isinstance(fm.get('tags'), list) else [],
+              'source_refs': [fm['source']] if fm.get('source') else [],
+              'related': fm.get('related') if isinstance(fm.get('related'), list) else ([fm['related']] if fm.get('related') else []),
+              'dependencies': [], 'outgoing_links': links, 'freshness_score': 1.0}
         fn = page_path.stem.replace(' ', '_').replace('?', '').replace(':', '-').lower() + '.json'; dest = output_dir / fn
         with open(dest, 'w', encoding='utf-8') as f: json.dump(sc, f, ensure_ascii=False, indent=2)
         return {'sidecar_path': str(dest.relative_to(BASE_DIR))}
