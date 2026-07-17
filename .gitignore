@@ -1,19 +1,57 @@
-﻿# Large files
-*.pdf
+# Personal content (your knowledge, not the runtime)
+知识库/
+源/
+工作台/
+归档/
+首页.md
+使用者画像.md
+index.md
+hot.md
+log.md
+下次工作计划.md
+milestones.md
+BOOTSTRAP.md
 
-# OS junk
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
+# Old protocol markdowns (migrated to protocol/*.json)
+agents/*.md
+capability-map.md
+check-protocol.md
+context-budget.md
+ingest-protocol.md
+knowledge-lifecycle-engine.md
+wrapup-protocol.md
+踩坑集.md
 
-# Temp files
-*.tmp
-*.swp
-*~
+# Runtime generated data (not source code)
+memory/sessions/
+memory/project.json
+memory/semantic_index.json
+event-bus/history/
+reports/
+source/original/
+source/summaries/
+graphs/dependency.json
 
-# Codex
-.codex/
+# Knowledge sidecars (regenerated from content)
+knowledge/*.json
+!knowledge/metadata-schema.json
+knowledge/pages/
 
-# Python cache
+# State history (runtime data)
+state/.history/
+
+# Accidental artifacts
+my-wiki/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+
+# Obsidian workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# OS
+.DS_Store
+Thumbs.db
