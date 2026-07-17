@@ -7,6 +7,25 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
+## [1.2.0] — 2026-07-17（开发中，未发布）
+
+市场化工程化：让"任何人 clone/安装即可用"可验证。
+
+### Added
+- LICENSE（MIT）——此前 README 宣称 MIT 但无许可证文件
+- GitHub Actions CI：`.github/workflows/test.yml`（ubuntu + windows × Python 3.11/3.12 跑 unittest）；README 加 CI 与 License badge
+- pip 打包：`pyproject.toml`，`pip install -e .` 后可用 `agent-runtime` 命令
+- `scripts/ingest.py`：ingest 协议的命令行入口（此前只能写 Python 调用）
+- `examples/QUICKSTART.md`：5 分钟上手路径（全部命令实机验证）
+- `.github/ISSUE_TEMPLATE/`（bug/功能）+ `CONTRIBUTING.md`
+
+### Changed
+- 目录改名（pip 打包前置）：`event-bus/` → `event_bus/`、`state-manager/` → `state_manager/`、`agents/wiki-agent.py` → `agents/wiki_agent.py`；引用全部同步（代码、脚本、文档）
+- 各包新增 `__init__.py`，可作为正常 Python 包导入
+- test_schema_validation：fresh clone（无 sidecar）时优雅跳过而非失败——CI 可跑
+
+---
+
 ## [1.1.0] — 2026-07-17
 
 名实对齐 + 真实验收 + 文档裁决一轮。所有条目均有运行证据。

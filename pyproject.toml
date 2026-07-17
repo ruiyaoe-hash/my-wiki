@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-runtime"
+version = "1.2.0"
+description = "通用 AI 运行时：把你的 Markdown 知识库变成能自维护、自记忆的系统 / A general-purpose agent runtime for self-maintaining, self-remembering knowledge bases"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ruiyaoe-hash" }]
+keywords = ["agent", "runtime", "llm", "knowledge-base", "markdown", "obsidian"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/ruiyaoe-hash/my-wiki"
+Repository = "https://github.com/ruiyaoe-hash/my-wiki"
+Issues = "https://github.com/ruiyaoe-hash/my-wiki/issues"
+
+[project.scripts]
+agent-runtime = "agents.wiki_agent:main"
+
+[tool.setuptools]
+packages = ["agents", "planner", "executor", "event_bus", "memory", "state_manager"]

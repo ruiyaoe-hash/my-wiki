@@ -13,9 +13,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(BASE / 'state-manager'))
+sys.path.insert(0, str(BASE / 'state_manager'))
 sys.path.insert(0, str(BASE / 'executor'))
-sys.path.insert(0, str(BASE / 'event-bus'))
+sys.path.insert(0, str(BASE / 'event_bus'))
 sys.path.insert(0, str(BASE / 'memory'))
 
 from manager import StateManager

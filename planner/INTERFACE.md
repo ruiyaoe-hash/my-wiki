@@ -27,12 +27,12 @@ Dynamic orchestration / 动态编排：
 ## Files & Directories / 读写的文件与目录
 
 - 读写（均经 StateManager，agent_id=`'Planner'`）：`state/session.json`、`state/task-queue.json`、`state/current-task.json`
-- 写（经所依赖组件）：`memory/sessions/<session_id>.json`（MemoryStore.archive_task）、`event-bus/history/events.jsonl`（EventBus.persist）
+- 写（经所依赖组件）：`memory/sessions/<session_id>.json`（MemoryStore.archive_task）、`event_bus/history/events.jsonl`（EventBus.persist）
 - 不直接打开 `protocol/*.json`——Protocol 文件由 Executor 加载
 
 ## Dependencies / 依赖
 
-- `state-manager/manager.py` — `StateManager`
+- `state_manager/manager.py` — `StateManager`
 - `executor/executor.py` — `ProtocolExecutor`
-- `event-bus/event_bus.py` — `get_bus` / `Event` / `EventTypes`
+- `event_bus/event_bus.py` — `get_bus` / `Event` / `EventTypes`
 - `memory/memory_store.py` — `MemoryStore`

@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / 'state-manager'))
+sys.path.insert(0, str(ROOT / 'state_manager'))
 
 from manager import StateManager  # noqa: E402
 
@@ -42,7 +42,7 @@ def main():
     print('步骤 2: 运行 python agents/wiki-agent.py --recover --loop 1')
     env = dict(os.environ, PYTHONIOENCODING='utf-8')
     proc = subprocess.run(
-        [sys.executable, str(ROOT / 'agents' / 'wiki-agent.py'),
+        [sys.executable, str(ROOT / 'agents' / 'wiki_agent.py'),
          '--recover', '--loop', '1'],
         cwd=str(ROOT), env=env,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,

@@ -36,6 +36,11 @@ class TestSchemaValidation(unittest.TestCase):
             p for p in KNOWLEDGE_DIR.glob('*.json')
             if p.name != 'metadata-schema.json'
         )
+        if not cls.sidecars:
+            # Fresh clone / CI: personal content is gitignored, so no sidecars.
+            raise unittest.SkipTest(
+                'no knowledge sidecars in this checkout '
+                '(regenerate with scripts/rebuild_sidecars.py)')
 
     def test_sidecars_exist(self):
         self.assertGreater(len(self.sidecars), 0, 'no sidecars found')

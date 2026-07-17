@@ -1,6 +1,6 @@
 # Event Bus — Component Interface / 组件接口
 
-Source / 源码：`event-bus/event_bus.py`（Event Bus v0.1）
+Source / 源码：`event_bus/event_bus.py`（Event Bus v0.1）
 
 ## Responsibility / 职责
 
@@ -37,7 +37,7 @@ subscribers register by event_type.
 
 ## Files & Directories / 读写的文件与目录
 
-- 写：`event-bus/history/events.jsonl`（仅 `persist()` 被调用时，整历史覆盖写）
+- 写：`event_bus/history/events.jsonl`（`persist()` 追加模式，只写入新事件；`load_history()` 可从文件读回）
 
 ## Dependencies / 依赖
 

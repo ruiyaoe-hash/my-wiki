@@ -1,7 +1,22 @@
-# Agent Runtime — 你的个人 AI 运行时 / Your Personal AI Runtime
+Metadata-Version: 2.4
+Name: agent-runtime
+Version: 1.2.0
+Summary: 通用 AI 运行时：把你的 Markdown 知识库变成能自维护、自记忆的系统 / A general-purpose agent runtime for self-maintaining, self-remembering knowledge bases
+Author: ruiyaoe-hash
+License: MIT
+Project-URL: Homepage, https://github.com/ruiyaoe-hash/my-wiki
+Project-URL: Repository, https://github.com/ruiyaoe-hash/my-wiki
+Project-URL: Issues, https://github.com/ruiyaoe-hash/my-wiki/issues
+Keywords: agent,runtime,llm,knowledge-base,markdown,obsidian
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
 
-[![tests](https://github.com/ruiyaoe-hash/my-wiki/actions/workflows/test.yml/badge.svg)](https://github.com/ruiyaoe-hash/my-wiki/actions/workflows/test.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+# Agent Runtime — 你的个人 AI 运行时 / Your Personal AI Runtime
 
 > 一套通用 Agent 运行时，把你的 Markdown 知识库变成能自维护、自记忆的系统。
 > A general-purpose agent runtime that turns your markdown knowledge base into a self-maintaining, self-remembering system.
@@ -21,8 +36,8 @@
 ```bash
 git clone git@github.com:ruiyaoe-hash/my-wiki.git
 cd my-wiki
-pip install -e .        # 安装为命令行工具 agent-runtime（可选）
-python agents/wiki_agent.py  # 检查你的知识库（或：agent-runtime）
+python agents/wiki-agent.py  # 检查你的知识库
+python migration/migrate.py  # 迁移旧文件到新结构
 ```
 
 ## 架构 / Architecture
@@ -34,14 +49,14 @@ executor/   协议执行器 - 自动运行协议步骤
 state/      状态文件 - 当前发生了什么
 memory/     记忆存储 - 之前发生过什么 (L0-L4)
 planner/    编排引擎 - 取任务、匹配协议、执行
-event_bus/  事件总线 - 组件通信
+event-bus/  事件总线 - 组件通信
 graphs/     图结构 - 知识关系定义
 ```
 
 ## 让它成为你的 / Make It Yours
 
 1. 添加你的知识页（Markdown + YAML frontmatter）
-2. 运行 `python agents/wiki_agent.py` 检查
+2. 运行 `python agents/wiki-agent.py check` 检查
 3. 在 `protocol/*.json` 定义自己的协议，参考 `protocol/TEMPLATE.json`
 4. 在 `executor/executor.py` 添加自定义处理器
 
@@ -53,7 +68,7 @@ graphs/     图结构 - 知识关系定义
 python -m unittest discover tests      # 运行测试套件（29 用例）
 python scripts/build_graph.py          # 从 sidecar 重建依赖图
 python scripts/rebuild_sidecars.py     # 从 md frontmatter 重建 sidecar
-python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
+python agents/wiki-agent.py --loop 10 --interval 60   # 多轮自动运行
 ```
 
 每个组件的公开接口见对应目录下的 `INTERFACE.md`。/ Public interfaces: see `INTERFACE.md` in each component directory.
@@ -112,4 +127,4 @@ python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
 
 ---
 
-当前版本: v1.2.0 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)
+当前版本: v1.1.0 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

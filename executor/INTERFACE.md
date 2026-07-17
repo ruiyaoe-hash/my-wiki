@@ -33,7 +33,7 @@ Fail-fast：某一步没有对应 handler 或抛异常时立即中止整个 Prot
 
 ## Dependencies / 依赖
 
-- `state-manager/manager.py` — `StateManager`（`_handle_call_manager`、`_handle_update_hot_md` 等）
-- `event-bus/event_bus.py` — `get_bus` / `Event`（`_handle_emit_event`、`_handle_emit_warning`）
+- `state_manager/manager.py` — `StateManager`（`_handle_call_manager`、`_handle_update_hot_md` 等）
+- `event_bus/event_bus.py` — `get_bus` / `Event`（`_handle_emit_event`、`_handle_emit_warning`）
 - 可选：OpenAI 兼容 LLM endpoint（环境变量驱动，未配置则全离线运行）
 - 被使用：Planner（`run_task()` 调用 `execute()`）

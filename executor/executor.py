@@ -9,8 +9,8 @@ skipping, so a protocol can no longer fake success.
 import sys, os, json, re, urllib.request
 from datetime import datetime, date, timezone
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'state-manager'))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'event-bus'))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'state_manager'))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'event_bus'))
 PROTOCOL_DIR = Path(__file__).resolve().parent.parent / 'protocol'
 BASE_DIR = Path(__file__).resolve().parent.parent
 

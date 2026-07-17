@@ -1,0 +1,25 @@
+name: Bug Report / 缺陷报告
+description: 报告一个可复现的问题 / Report a reproducible problem
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么 / What happened
+      description: 实际行为 vs 期望行为 / Actual vs expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+      placeholder: |
+        1. python agents/wiki_agent.py --loop 1
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境 / Environment
+      placeholder: OS / Python 版本（python --version）
