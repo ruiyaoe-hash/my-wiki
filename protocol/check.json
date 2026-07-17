@@ -39,6 +39,12 @@
     },
     {
       "id": 4,
+      "action": "check_links",
+      "params": {},
+      "description": "检测断链"
+    },
+    {
+      "id": 5,
       "action": "generate_report",
       "params": {
         "output": "reports/check-{date}.md"
