@@ -1,0 +1,38 @@
+{
+  "protocol_id": "context-budget",
+  "version": "1.0.0",
+  "description": "????????50K ?? / 100K ?? / 200K ???",
+  "triggers": {
+    "auto": true,
+    "poll_interval": "per_turn"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "call_manager",
+      "params": {
+        "method": "get_goal"
+      },
+      "description": "?? token ??"
+    },
+    {
+      "id": 2,
+      "action": "check_threshold",
+      "params": {
+        "warn": 50000,
+        "limit": 100000,
+        "hard_cut": 200000
+      },
+      "description": "????"
+    },
+    {
+      "id": 3,
+      "action": "emit_warning",
+      "params": {
+        "condition": "tokens > warn"
+      },
+      "description": "????"
+    }
+  ],
+  "raw_source": "agents/context-budget.md"
+}

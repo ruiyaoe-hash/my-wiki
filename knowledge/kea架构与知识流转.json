@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "kea架构与知识流转",
+  "title": "KEA架构与知识流转",
+  "path": "KEA架构与知识流转.md",
+  "created": "2026-06-28",
+  "updated": "2026-06-28",
+  "type": "concept",
+  "domain": "knowledge-management",
+  "status": "developing",
+  "tags": [
+    "知识管理",
+    "KEA",
+    "知识流转",
+    "三端协同",
+    "检索"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "AI记忆的遗忘曲线",
+    "LLM Wiki模式",
+    "祥瑞知识管理三部曲",
+    "Vault六件事-Agent越用越聪明"
+  ],
+  "freshness_score": 1.0
+}

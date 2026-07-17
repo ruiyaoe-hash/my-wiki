@@ -1,0 +1,29 @@
+{
+  "knowledge_id": "📋_pkm_方法论",
+  "title": "📋 PKM 方法论",
+  "path": "📋 PKM 方法论.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "moc",
+  "domain": "knowledge-management",
+  "status": "growing",
+  "tags": [
+    "moc",
+    "sub-moc",
+    "pkm",
+    "methodology"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Vault六件事-Agent越用越聪明",
+    "Evergreen Notes",
+    "Zettelkasten 方法",
+    "PARA 方法",
+    "🏠 知识管理",
+    "MOC 地图笔记法",
+    "祥瑞知识管理三部曲",
+    "KEA架构与知识流转"
+  ],
+  "freshness_score": 1.0
+}

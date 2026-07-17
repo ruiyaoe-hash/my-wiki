@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "moc_地图笔记法",
+  "title": "MOC 地图笔记法",
+  "path": "MOC 地图笔记法.md",
+  "created": "2026-06-29",
+  "updated": "2026-06-29",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "evergreen",
+  "tags": [
+    "lyt",
+    "nick-milo",
+    "obsidian",
+    "navigation"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "🏠 文旅策划",
+    "Evergreen Notes",
+    "Zettelkasten 方法",
+    "LLM Wiki模式",
+    "🏠 AI工程",
+    "知识库跨域架构第一性原理"
+  ],
+  "freshness_score": 1.0
+}

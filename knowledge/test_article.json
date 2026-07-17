@@ -1,0 +1,15 @@
+{
+  "knowledge_id": "test_article",
+  "title": "Test_Article",
+  "path": "knowledge\\pages\\Test_Article.md",
+  "created": "2026-07-17",
+  "updated": "2026-07-17",
+  "type": "concept",
+  "domain": "knowledge-management",
+  "status": "draft",
+  "tags": [],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

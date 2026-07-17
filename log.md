@@ -1,3 +1,53 @@
+## [2026-07-16] wrapup | 会话收尾
+- state/session.json：状态标记为 ended
+- state/current-task.json：标记为 completed
+- state/task-queue.json：清空
+- hot.md：追加本次会话成果 Memory（HMS 分析 + Phase 0+1 完成）
+
+## [2026-07-16] docs | CHANGELOG.md 替代迁移标记文件
+- 删除 migration-plan.md + 3 个 _MIGRATION_NOTICE.md
+- 新建 CHANGELOG.md：v0.0.0-wiki → v0.0.0 → v0.1.0 → Unreleased 完整版本历史
+- 原则：版本变化写在 CHANGELOG 里，旧版通过 git checkout v0.0-wiki 恢复
+
+## [2026-07-16] plan | 目录迁移计划 + 旧目录标记
+- migration-plan.md：旧→新目录映射表 + 迁移时间表 + 检查清单
+- 知识库/_MIGRATION_NOTICE.md、源/_MIGRATION_NOTICE.md、agents/_MIGRATION_NOTICE.md：迁移标记
+- 原则：不删旧文件、不跨 Phase 迁移、Obsidian 兼容性优先
+
+## [2026-07-16] build | Phase 1 完成——State Runtime v0.1
+
+### 新建
+- state/ 4 个 JSON 文件（schema + session + task-queue + current-task）
+- state-manager/manager.py（lock/validate/merge/history/recover）
+- policy.md（Agent 权限矩阵 v0.1）
+
+### 修改
+- hot.md：TODO 迁移到 state，只保留 Memory
+- AGENTS.md：新增 State 层说明
+
+### 验证
+- State Manager 全部 5 个操作测试通过
+
+## [2026-07-16] evolve | Phase 0 完成——Ontology v0.1
+
+### Step 0a：Perspective + Object Rule
+- ontology/perspective.md：Runtime 视角声明
+- ontology/object-rule.md：一条规则判定一等对象（寻址+状态查询+执行操作）
+
+### Step 0b：Object Discovery
+- 从 7 个 protocol + hot.md + AGENTS.md 中扫描
+- 发现 13 个候选对象
+
+### Step 0c：Ontology v0.1
+- ontology/ontology.md：7 个确认对象（Knowledge/Source/Memory/State/Session/Protocol/Task）+ 1 个预留（Event）
+- 每个对象定义：一句话 + 生命周期 + Owner + Consumer
+- 不含 Schema（Phase 1 后萃取）
+
+### 项目分支结构
+- main 分支：v0.0-wiki 基线（tag 已打）
+- develop 分支：Phase 0 开发在此进行
+- 预留目录：state/ memory/ protocol/ capability/ planner/ workflow/
+
 ## [2026-07-16] ingest | HMS GitHub 仓库深度分析
 - 源/原文/hms-readme-en.md、hms-readme-zh.md：英文/中文 README 原文
 - 源/原文/hms-longmemeval-benchmark.py：LongMemEval 基准测试实现

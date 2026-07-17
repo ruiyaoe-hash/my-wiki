@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "ai驱动知识管理",
+  "title": "AI驱动的知识管理",
+  "path": "AI驱动知识管理.md",
+  "created": "2026-06-24",
+  "updated": "2026-06-24",
+  "type": "concept",
+  "domain": "meta",
+  "status": "developing",
+  "tags": [
+    "知识管理",
+    "Obsidian",
+    "Claude Code",
+    "PKM"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "工具与人物速查",
+    "谷歌发布OKF（开放知识格式）：卡帕西LLM-Wiki设想的标准化落地",
+    "Obsidian-×-Claude-Code-知识管理深度实践：构建会成长的AI-Agent大脑",
+    "LLM Wiki模式",
+    "OKF开放知识格式",
+    "Obsidian新手前三个月核心行动指南：从「吃灰」到「落地」的极简路径"
+  ],
+  "freshness_score": 1.0
+}

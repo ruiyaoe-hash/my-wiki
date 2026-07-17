@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "openviking_上下文数据库",
+  "title": "OpenViking 上下文数据库",
+  "path": "OpenViking 上下文数据库.md",
+  "created": "2026-06-28",
+  "updated": "2026-06-28",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "OpenViking",
+    "上下文管理",
+    "分层加载",
+    "文件系统范式"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "HippoRAG 记忆框架",
+    "Agent记忆技术全景",
+    "Letta 状态化Agent",
+    "Mem0 记忆层",
+    "外部记忆-行业全景"
+  ],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,17 @@
+{
+  "knowledge_id": "标签索引",
+  "title": "标签索引",
+  "path": "标签索引.md",
+  "created": "2026-07-02",
+  "updated": "2026-07-02",
+  "type": "concept",
+  "domain": "meta",
+  "status": "growing",
+  "tags": [],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "🏠 元知识"
+  ],
+  "freshness_score": 1.0
+}

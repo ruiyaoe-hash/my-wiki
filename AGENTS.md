@@ -7,7 +7,20 @@
 - 🏠 首页.md - 知识库导航主页
 - agents/ - 按需加载的协议文件（触发词激活）
 
-## 三个基础设施文件（AI 专用）
+
+## State 层（Phase 1 新增）
+
+- state/current-task.json — 当前正在执行的任务（状态、进度、持有者）
+- state/task-queue.json — 排队中的任务列表
+- state/session.json — 当前会话元数据
+- state-manager/manager.py — 多 Agent 状态协调器（锁/校验/合并/历史/恢复）
+
+进站时先读 state/session.json 判断会话状态，再读 state/current-task.json 恢复执行上下文。
+进度和 TODO 不再从 hot.md 读取——hot.md 从现在起只保留不可变的 Memory。
+如果 state/current-task.json 为空（	ask_id: null）且 task-queue.json 为空，则退回到 **下次工作计划.md** 寻找待办任务。
+
+## 三个基础设施文件
+（AI 专用）
 - index.md - 全局目录。接问题先翻这里，找到相关页面再深入读
 - log.md - 操作日志。每次摄入/检查/编辑/会话结束后在此追加记录。新条目放顶部。每月末将旧条目归档到 归档/会话/YYYY-MM-log.md，只保留当月记录
 - hot.md - 热缓存。每次会话结束时更新，存最近上下文

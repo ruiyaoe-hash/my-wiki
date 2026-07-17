@@ -1,0 +1,22 @@
+{
+  "knowledge_id": "ai人才市场观察",
+  "title": "AI 人才市场观察",
+  "path": "AI人才市场观察.md",
+  "created": "2026-06-29",
+  "updated": "2026-06-29",
+  "type": "concept",
+  "domain": "ai-talent",
+  "status": "developing",
+  "tags": [
+    "recruitment",
+    "talent",
+    "industry-trends"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "工具与人物速查",
+    "🏠 AI人才"
+  ],
+  "freshness_score": 1.0
+}

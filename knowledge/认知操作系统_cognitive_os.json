@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "认知操作系统_cognitive_os",
+  "title": "认知操作系统 Cognitive OS",
+  "path": "认知操作系统 Cognitive OS.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "认知架构",
+    "AGI",
+    "OS",
+    "架构"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "CoALA 认知架构",
+    "知识管理闭环蓝图",
+    "Memory as Metabolism 记忆代谢",
+    "Letta 状态化Agent",
+    "MemGPT 虚拟上下文管理"
+  ],
+  "freshness_score": 1.0
+}

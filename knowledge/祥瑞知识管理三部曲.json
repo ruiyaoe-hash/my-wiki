@@ -1,0 +1,31 @@
+{
+  "knowledge_id": "祥瑞知识管理三部曲",
+  "title": "祥瑞知识管理三部曲：对 Wiki 的启发",
+  "path": "祥瑞知识管理三部曲.md",
+  "created": "2026-06-28",
+  "updated": "2026-06-28",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "知识管理",
+    "Agent记忆",
+    "遗忘曲线",
+    "PROGRESS.md",
+    "Vault",
+    "实践参考"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Vault六件事-Agent越用越聪明",
+    "知识管理闭环蓝图",
+    "HippoRAG 记忆框架",
+    "Letta 状态化Agent",
+    "AI记忆的遗忘曲线",
+    "Mem0 记忆层",
+    "外部记忆-行业全景",
+    "KEA架构与知识流转"
+  ],
+  "freshness_score": 1.0
+}

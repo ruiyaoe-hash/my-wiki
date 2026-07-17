@@ -1,0 +1,20 @@
+{
+  "knowledge_id": "claude_code_agent_循环机制",
+  "title": "Claude Code Agent 循环机制",
+  "path": "Claude Code Agent 循环机制.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "draft",
+  "tags": [
+    "Claude Code",
+    "Agent Loop",
+    "循环机制",
+    "自动化"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

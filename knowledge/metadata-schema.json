@@ -1,0 +1,97 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Knowledge Page Metadata Sidecar",
+  "description": "Each markdown knowledge page has one JSON sidecar with this schema.",
+  "version": "0.1.0",
+  "properties": {
+    "knowledge_id": {
+      "type": "string",
+      "description": "Unique ID, derived from filename slug"
+    },
+    "title": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string",
+      "description": "Relative path from knowledge/ root"
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "method",
+        "analysis",
+        "moc",
+        "review",
+        "roadmap"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "agent-memory",
+        "agent-engineering",
+        "knowledge-management",
+        "meta",
+        "runtime"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "evergreen",
+        "draft",
+        "stale",
+        "archived"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "References to source/ IDs that this knowledge was derived from"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "knowledge_ids this page depends on (for Dependency Graph)"
+    },
+    "outgoing_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "wikilinks found in this page (for Knowledge Graph)"
+    },
+    "freshness_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "1.0 = fresh (<30d), decays to 0 at 180d"
+    }
+  },
+  "required": [
+    "knowledge_id",
+    "title",
+    "path",
+    "type",
+    "status"
+  ]
+}

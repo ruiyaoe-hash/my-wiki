@@ -1,0 +1,19 @@
+{
+  "knowledge_id": "agent_runtime_开发路线图",
+  "title": "Agent Runtime 开发路线图",
+  "path": "Agent Runtime 开发路线图.md",
+  "created": "2026-07-10",
+  "updated": "2026-07-10",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "draft",
+  "tags": [
+    "roadmap",
+    "development-plan",
+    "phase-planning"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

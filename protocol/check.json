@@ -1,0 +1,50 @@
+{
+  "protocol_id": "check",
+  "version": "1.0.0",
+  "description": "???????/???/stale/??",
+  "triggers": {
+    "keywords": [
+      "??",
+      "lint",
+      "check"
+    ]
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "search_files",
+      "params": {
+        "dir": "knowledge/",
+        "pattern": "*.json"
+      },
+      "description": "???? sidecar"
+    },
+    {
+      "id": 2,
+      "action": "search_files",
+      "params": {
+        "dir": "???/",
+        "pattern": "*.md"
+      },
+      "description": "???????"
+    },
+    {
+      "id": 3,
+      "action": "check_stale",
+      "params": {
+        "field": "updated",
+        "threshold_days": 90
+      },
+      "description": "?? stale ?"
+    },
+    {
+      "id": 4,
+      "action": "generate_report",
+      "params": {
+        "output": "reports/check-{date}.md"
+      },
+      "description": "????"
+    }
+  ],
+  "raw_source": "agents/check-protocol.md"
+}

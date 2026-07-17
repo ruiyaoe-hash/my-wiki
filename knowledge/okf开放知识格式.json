@@ -1,0 +1,25 @@
+{
+  "knowledge_id": "okf开放知识格式",
+  "title": "OKF 开放知识格式",
+  "path": "OKF开放知识格式.md",
+  "created": "2026-06-24",
+  "updated": "2026-06-24",
+  "type": "concept",
+  "domain": "meta",
+  "status": "mature",
+  "tags": [
+    "OKF",
+    "标准化",
+    "知识交换",
+    "谷歌"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "AI驱动知识管理",
+    "工具与人物速查",
+    "谷歌发布OKF（开放知识格式）：卡帕西LLM-Wiki设想的标准化落地",
+    "LLM Wiki模式"
+  ],
+  "freshness_score": 1.0
+}

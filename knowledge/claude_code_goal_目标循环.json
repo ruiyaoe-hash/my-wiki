@@ -1,0 +1,21 @@
+{
+  "knowledge_id": "claude_code_goal_目标循环",
+  "title": "Claude Code Goal 目标循环",
+  "path": "Claude Code Goal 目标循环.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "draft",
+  "tags": [
+    "Claude Code",
+    "/goal",
+    "目标循环",
+    "自动化",
+    "Agent Loop"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

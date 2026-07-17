@@ -1,0 +1,19 @@
+{
+  "knowledge_id": "runtime_object_识别规则",
+  "title": "Runtime Object 识别规则",
+  "path": "Runtime Object 识别规则.md",
+  "created": "2026-07-10",
+  "updated": "2026-07-10",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "evergreen",
+  "tags": [
+    "ontology",
+    "object-rule",
+    "runtime"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,28 @@
+{
+  "knowledge_id": "📋_agent_架构与协作",
+  "title": "📋 Agent 架构与协作",
+  "path": "📋 Agent 架构与协作.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "moc",
+  "domain": "agent-systems-engineering",
+  "status": "growing",
+  "tags": [
+    "moc",
+    "sub-moc",
+    "agent-architecture",
+    "multi-agent"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Session管理",
+    "认知操作系统 Cognitive OS",
+    "LLM Wiki模式",
+    "🏠 Agent 系统工程",
+    "多智能体系统",
+    "生成式Agent-Stanford小镇",
+    "Agent协作失败模式"
+  ],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,73 @@
+{
+  "protocol_id": "ingest",
+  "version": "1.1.0",
+  "description": "?????????????AI???????????????",
+  "triggers": {
+    "keywords": [
+      "??",
+      "ingest",
+      "???",
+      "??"
+    ],
+    "auto": false
+  },
+  "inputs": {
+    "required": [
+      "url_or_path"
+    ],
+    "optional": [
+      "title",
+      "tags",
+      "domain"
+    ]
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "fetch_url",
+      "params": {
+        "url": "{{inputs.url_or_path}}",
+        "output_dir": "source/original/"
+      },
+      "description": "?????????"
+    },
+    {
+      "id": 2,
+      "action": "generate_summary",
+      "params": {
+        "input_file": "{{steps.1.original_path}}",
+        "output_dir": "source/summaries/"
+      },
+      "description": "?? AI ??"
+    },
+    {
+      "id": 3,
+      "action": "create_knowledge_page",
+      "params": {
+        "title": "{{inputs.title}}",
+        "tags": "{{inputs.tags}}",
+        "domain": "{{inputs.domain}}",
+        "output_dir": "knowledge/pages/"
+      },
+      "description": "?????"
+    },
+    {
+      "id": 4,
+      "action": "generate_sidecar",
+      "params": {
+        "page_path": "{{steps.3.page_path}}",
+        "output_dir": "knowledge/"
+      },
+      "description": "?? metadata sidecar"
+    },
+    {
+      "id": 5,
+      "action": "update_index",
+      "params": {
+        "new_page_title": "{{inputs.title}}"
+      },
+      "description": "?? index.md"
+    }
+  ],
+  "raw_source": "agents/ingest-protocol.md"
+}

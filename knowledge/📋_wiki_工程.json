@@ -1,0 +1,30 @@
+{
+  "knowledge_id": "📋_wiki_工程",
+  "title": "📋 Wiki 工程",
+  "path": "📋 Wiki 工程.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "moc",
+  "domain": "knowledge-management",
+  "status": "growing",
+  "tags": [
+    "moc",
+    "sub-moc",
+    "wiki-engineering",
+    "architecture"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "工具与人物速查",
+    "知识管理闭环蓝图",
+    "LLM Wiki模式",
+    "使用者画像",
+    "标签索引",
+    "AI驱动知识管理",
+    "知识库跨域架构第一性原理",
+    "OKF开放知识格式",
+    "🏠 知识管理"
+  ],
+  "freshness_score": 1.0
+}

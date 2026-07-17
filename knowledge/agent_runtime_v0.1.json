@@ -1,0 +1,19 @@
+{
+  "knowledge_id": "agent_runtime_v0.1",
+  "title": "Agent Runtime v0.1",
+  "path": "Agent Runtime v0.1.md",
+  "created": "2026-07-10",
+  "updated": "2026-07-10",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "evergreen",
+  "tags": [
+    "Agent-Runtime",
+    "architecture",
+    "wiki-evolution"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

@@ -9,6 +9,8 @@
 - [[🏠 知识管理]] — 知识怎么管、Wiki 怎么建（~15 页）
 
 ## 新入库
+- [[Integration Test]] — Agent Runtime 自动入库
+- [[Test Article]] — Agent Runtime 自动入库
 
 - [[Harness 工程]] — 翁荔2026年系统综述：AI外面的脚手架怎么搭、怎么自我优化
 - [[HMS 全息记忆系统]] — Shadoweave 的全息记忆系统，五动词协议定义记忆层标准接口

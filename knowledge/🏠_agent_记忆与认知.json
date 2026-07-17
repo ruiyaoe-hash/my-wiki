@@ -1,0 +1,30 @@
+{
+  "knowledge_id": "🏠_agent_记忆与认知",
+  "title": "🏠 Agent 记忆与认知",
+  "path": "🏠 Agent 记忆与认知.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "moc",
+  "domain": "agent-memory-cognition",
+  "status": "growing",
+  "tags": [
+    "moc",
+    "domain-entry",
+    "agent-memory",
+    "cognitive-science"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "📋 记忆系统",
+    "AI Meets Brain 综述",
+    "From Human Memory to AI Memory 综述",
+    "🏠 Agent 系统工程",
+    "📋 认知机制",
+    "🏠 知识管理",
+    "Memory in the Age of AI Agents 综述",
+    "外部记忆-行业全景",
+    "Memory for Autonomous LLM Agents 综述"
+  ],
+  "freshness_score": 1.0
+}

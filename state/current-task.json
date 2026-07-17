@@ -1,0 +1,19 @@
+{
+  "task_id": "wiki-check-001",
+  "task_type": "check",
+  "status": "completed",
+  "current_step": 0,
+  "total_steps": 5,
+  "progress": 1.0,
+  "owner_agent": "Planner",
+  "context": {
+    "task_id": "wiki-check-001",
+    "task_type": "check",
+    "priority": 1,
+    "description": "Wiki lint check: stale pages and broken links",
+    "created_at": "2026-07-17T03:00:00Z",
+    "context": {
+      "scope": "knowledge"
+    }
+  }
+}
