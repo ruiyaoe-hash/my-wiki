@@ -1,13 +1,13 @@
 {
   "protocol_id": "ingest",
   "version": "1.1.0",
-  "description": "?????????????AI???????????????",
+  "description": "把外部内容吃进去：抓取原文、AI 摘要、生成知识页并更新索引",
   "triggers": {
     "keywords": [
-      "??",
+      "入库",
       "ingest",
-      "???",
-      "??"
+      "吃进去",
+      "摄入"
     ],
     "auto": false
   },
@@ -29,7 +29,7 @@
         "url": "{{inputs.url_or_path}}",
         "output_dir": "source/original/"
       },
-      "description": "?????????"
+      "description": "抓取原文并存档"
     },
     {
       "id": 2,
@@ -38,7 +38,7 @@
         "input_file": "{{steps.1.original_path}}",
         "output_dir": "source/summaries/"
       },
-      "description": "?? AI ??"
+      "description": "生成 AI 摘要"
     },
     {
       "id": 3,
@@ -47,9 +47,10 @@
         "title": "{{inputs.title}}",
         "tags": "{{inputs.tags}}",
         "domain": "{{inputs.domain}}",
-        "output_dir": "knowledge/pages/"
+        "source_path": "{{steps.1.original_path}}",
+        "output_dir": "知识库/"
       },
-      "description": "?????"
+      "description": "创建知识页"
     },
     {
       "id": 4,
@@ -58,7 +59,7 @@
         "page_path": "{{steps.3.page_path}}",
         "output_dir": "knowledge/"
       },
-      "description": "?? metadata sidecar"
+      "description": "生成 metadata sidecar"
     },
     {
       "id": 5,
@@ -66,7 +67,7 @@
       "params": {
         "new_page_title": "{{inputs.title}}"
       },
-      "description": "?? index.md"
+      "description": "更新 index.md"
     }
   ],
   "raw_source": "agents/ingest-protocol.md"

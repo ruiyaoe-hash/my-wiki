@@ -4,7 +4,7 @@
   "description": "What does this protocol do?",
   "triggers": {
     "keywords": [
-      "???1",
+      "触发词1",
       "trigger-word"
     ],
     "auto": false

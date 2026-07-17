@@ -1,12 +1,13 @@
 {
-  "": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Dependency Graph Schema",
-  "description": "??????? knowledge_id ? protocol_id?? A?B ?? A ?? B?A ? B ????/????",
+  "description": "节点间依赖关系：节点为 knowledge_id 或 protocol_id；A→B 表示 A depends on B（A 依赖/派生自 B）",
   "version": "0.1.0",
+  "type": "object",
   "node_schema": {
     "node_id": {
       "type": "string",
-      "description": "knowledge_id ? protocol_id"
+      "description": "knowledge_id 或 protocol_id"
     },
     "node_type": {
       "type": "string",
@@ -18,11 +19,11 @@
     },
     "label": {
       "type": "string",
-      "description": "???????"
+      "description": "节点显示名称"
     },
     "metadata": {
       "type": "object",
-      "description": "?? knowledge/ ? protocol/ ? JSON sidecar"
+      "description": "指向 knowledge/ 或 protocol/ 的 JSON sidecar"
     }
   },
   "edge_schema": {
@@ -45,20 +46,20 @@
     }
   },
   "graph_format": {
-    "description": "??? JSON??????????? + ????",
+    "description": "实际 JSON 图数据文件：节点列表 + 边列表",
     "file": "graphs/dependency.json",
     "example": {
       "nodes": [
         {
-          "node_id": "agent_runtime_????",
+          "node_id": "agent_runtime_核心概念",
           "node_type": "knowledge",
-          "label": "Agent Runtime ????"
+          "label": "Agent Runtime 核心概念"
         }
       ],
       "edges": [
         {
-          "source": "state_?_memory_???",
-          "target": "agent_runtime_????",
+          "source": "state_与_memory_的分离",
+          "target": "agent_runtime_核心概念",
           "relation": "depends_on"
         }
       ]

@@ -1,11 +1,11 @@
 {
   "protocol_id": "wrapup",
   "version": "1.0.0",
-  "description": "??????? hot.md + log.md + state + ??????",
+  "description": "会话收尾：更新 hot.md + log.md + state + 下次工作计划",
   "triggers": {
     "keywords": [
-      "??",
-      "??",
+      "收尾",
+      "结束",
       "wrapup"
     ]
   },
@@ -14,7 +14,7 @@
       "id": 1,
       "action": "update_hot_md",
       "params": {},
-      "description": "?? hot.md ?????????"
+      "description": "更新 hot.md 当前状态与成果"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "params": {
         "file": "log.md"
       },
-      "description": "log.md ??????"
+      "description": "log.md 追加本次记录"
     },
     {
       "id": 3,
@@ -31,25 +31,25 @@
         "method": "read",
         "file": "session.json"
       },
-      "description": "??? session"
+      "description": "读取 session"
     },
     {
       "id": 4,
       "action": "call_manager",
       "params": {
-        "method": "write",
+        "method": "update",
         "file": "session.json",
-        "data": "ended"
+        "data": {"status": "ended"}
       },
-      "description": "?? session ??"
+      "description": "写回 session 状态"
     },
     {
       "id": 5,
       "action": "write_next_plan",
       "params": {
-        "file": "??????.md"
+        "file": "下次工作计划.md"
       },
-      "description": "???????"
+      "description": "写下次工作计划"
     }
   ],
   "raw_source": "agents/wrapup-protocol.md"

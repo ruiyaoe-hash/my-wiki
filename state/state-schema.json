@@ -119,5 +119,30 @@
         "description": "Tasks completed this session"
       }
     }
+  },
+  "execution-status": {
+    "description": "Runtime execution status: whether the agent is currently active, plus cumulative run counters.",
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "active",
+          "idle"
+        ]
+      },
+      "last_run": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When the last session started"
+      },
+      "tasks_processed": {
+        "type": "integer",
+        "description": "Cumulative tasks completed across all sessions"
+      },
+      "sessions_total": {
+        "type": "integer",
+        "description": "Cumulative sessions ended"
+      }
+    }
   }
 }

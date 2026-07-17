@@ -1,6 +1,7 @@
 {
   "protocol_id": "capability-map",
   "version": "0.0.1",
+  "description": "能力映射，待从 agents/capability-map.md 迁移",
   "status": "pending_migration",
   "raw_source": "agents/capability-map.md"
 }

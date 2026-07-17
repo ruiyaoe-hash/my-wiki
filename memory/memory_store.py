@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Memory Store v0.1 — L0-L2 of the five-layer memory architecture.
+"""Memory Store v0.2 — full L0-L4 of the five-layer memory architecture.
 
 L0: Working Memory  — in-memory dict, evicted on Task completion
 L1: Session Memory  — persisted JSON per session
 L2: Project Memory  — persistent project-wide records
+L3: Semantic Memory — knowledge page index (sem_index / sem_search)
+L4: Archive         — sessions older than N days moved to archive/
 
 Five-verb protocol: create / read / update / delete / query
 Memory records are APPEND-ONLY — never modified, only archived.
@@ -39,7 +41,7 @@ class MemoryRecord:
 
 
 class MemoryStore:
-    """Memory Store implementing L0-L2.
+    """Memory Store implementing L0-L4.
 
     Usage:
         ms = MemoryStore()
@@ -96,7 +98,8 @@ class MemoryStore:
         level: 'session' or 'project'
         scope: session_id (for session) or category (for project: 'decisions', 'milestones', 'records')
         """
-        record = MemoryRecord(content, source=kwargs.get('source'), metadata=kwargs)
+        record = MemoryRecord(content, record_type=kwargs.get('record_type', 'note'),
+                              source=kwargs.get('source'), metadata=kwargs.get('metadata', {}))
 
         if level == 'session':
             data = self._load_session(scope)

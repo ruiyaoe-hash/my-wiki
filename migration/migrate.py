@@ -2,7 +2,7 @@
 """Migration: old directories -> new structure.
 
 Safe to run multiple times. Creates symlinks, does NOT delete originals.
-Knowledge pages stay IN PLACE ? both old and new directories coexist.
+Knowledge pages stay IN PLACE —— both old and new directories coexist.
 
 Usage: python migration/migrate.py
 """
@@ -12,8 +12,8 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 MIGRATIONS = [
-    ('?/??/', 'source/original/'),
-    ('?/??/', 'source/summaries/'),
+    ('源/原文/', 'source/original/'),
+    ('源/摘要/', 'source/summaries/'),
 ]
 PROTOCOL_MAP = {
     'agents/check-protocol.md': 'protocol/check.json',

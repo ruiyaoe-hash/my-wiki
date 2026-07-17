@@ -1,7 +1,7 @@
 {
   "protocol_id": "context-budget",
   "version": "1.0.0",
-  "description": "????????50K ?? / 100K ?? / 200K ???",
+  "description": "上下文 token 预算监控：50K 警告 / 100K 上限 / 200K 硬切",
   "triggers": {
     "auto": true,
     "poll_interval": "per_turn"
@@ -13,7 +13,7 @@
       "params": {
         "method": "get_goal"
       },
-      "description": "?? token ??"
+      "description": "获取 token 用量"
     },
     {
       "id": 2,
@@ -23,7 +23,7 @@
         "limit": 100000,
         "hard_cut": 200000
       },
-      "description": "????"
+      "description": "检查阈值"
     },
     {
       "id": 3,
@@ -31,7 +31,7 @@
       "params": {
         "condition": "tokens > warn"
       },
-      "description": "????"
+      "description": "发出警告"
     }
   ],
   "raw_source": "agents/context-budget.md"
