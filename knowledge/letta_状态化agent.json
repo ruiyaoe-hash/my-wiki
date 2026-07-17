@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "letta_状态化agent",
+  "title": "Letta 状态化Agent",
+  "path": "Letta 状态化Agent.md",
+  "created": "2026-06-27",
+  "updated": "2026-06-27",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "Letta",
+    "MemGPT",
+    "状态化Agent",
+    "自我编辑"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "OpenRath",
+    "Session管理",
+    "外部记忆-行业全景",
+    "Mem0 记忆层"
+  ],
+  "freshness_score": 1.0
+}

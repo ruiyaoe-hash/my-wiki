@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "多智能体系统",
+  "title": "多智能体系统 (Multi-Agent Systems)",
+  "path": "多智能体系统.md",
+  "created": "2026-06-24",
+  "updated": "2026-06-24",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent",
+    "AI架构",
+    "协作系统"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Session管理",
+    "Agent协作失败模式",
+    "OpenRath",
+    "OpenRath：多智能体系统的Session中心化革命——从Agent群聊到运行时控制平面",
+    "SAG：基于SQL的大模型检索增强新范式——从GraphRAG痛点到多跳检索突破",
+    "AI持续学习"
+  ],
+  "freshness_score": 1.0
+}

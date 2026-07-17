@@ -1,0 +1,37 @@
+{
+  "protocol_id": "my-protocol",
+  "version": "1.0.0",
+  "description": "What does this protocol do?",
+  "triggers": {
+    "keywords": [
+      "???1",
+      "trigger-word"
+    ],
+    "auto": false
+  },
+  "inputs": {
+    "required": [],
+    "optional": []
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "search_files",
+      "params": {
+        "dir": "",
+        "pattern": ""
+      },
+      "description": "Step 1"
+    },
+    {
+      "id": 2,
+      "action": "emit_event",
+      "params": {
+        "event_type": "custom.event",
+        "payload": {}
+      },
+      "description": "Step 2"
+    }
+  ],
+  "raw_source": "user-defined"
+}

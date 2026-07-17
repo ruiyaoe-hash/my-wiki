@@ -1,0 +1,21 @@
+{
+  "knowledge_id": "claude_code_routines_云端例程",
+  "title": "Claude Code Routines 云端例程",
+  "path": "Claude Code Routines 云端例程.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "draft",
+  "tags": [
+    "Claude Code",
+    "Routines",
+    "云端",
+    "自动化",
+    "调度"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

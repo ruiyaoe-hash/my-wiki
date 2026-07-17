@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "记忆巩固_consolidation",
+  "title": "记忆巩固 Consolidation",
+  "path": "记忆巩固 Consolidation.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "记忆巩固",
+    "Consolidation",
+    "睡眠巩固",
+    "生物启发"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "SCM 睡眠巩固记忆",
+    "FadeMem 生物启发遗忘",
+    "Memory as Metabolism 记忆代谢",
+    "AI记忆的遗忘曲线",
+    "KEA架构与知识流转"
+  ],
+  "freshness_score": 1.0
+}

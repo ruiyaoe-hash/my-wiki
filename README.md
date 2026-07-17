@@ -1,63 +1,47 @@
----
-title: "My Wiki — AI 助手快速说明书"
-type: meta
-description: "任何 AI 助手在接手任务前应先读此文件，5 分钟内理解本 wiki 是什么、怎么运作、当前状态。"
-created: "2026-07-10"
-updated: "2026-07-10"
----
+# Agent Runtime — Your Personal AI Operating System
 
-# My Wiki 说明书
+A general-purpose agent runtime that turns your markdown knowledge base into a self-maintaining, self-remembering system.
 
-## 这是什么
+## What It Does
 
-一个**为 AI 助手设计的个人知识库**，研究主题聚焦 Agent 记忆系统、认知机制和工程实践。它不是给人翻阅的笔记堆，而是一个有协议、有生命周期的 AI 原生知识
-系统。当前规模：69 篇知识页（59 概念页 + 10 MOC 导航页）、54 篇原始资料归档、51 篇 AI 摘要，另有 7 个操作协议文件驱动日常运转。
+- **Auto-check** your knowledge base for stale pages and broken links
+- **Auto-ingest** any URL or local file into structured knowledge
+- **Remember** what happened in every session (Memory Store L0-L4)
+- **Coordinate** multiple AI agents without conflicts (StateManager + EventBus)
+- **Extend** with your own protocols (just write a JSON file)
 
-## 三句话理解架构
+## 5-Minute Start
 
-- **MOC 做导航**（按主题挑选核心内容），**Index 做库存**（完整列出所有页面），两者互不重复
-- **单 vault 平铺**——所有知识页在同一层目录，不按文件夹分类；靠 frontmatter 标签 + MOC 页面组织导航
-- **知识页 = 正文**，源/原文/ = 原始材料归档，源/摘要/ = AI 写的材料摘要；永远先读知识页，需要原文证据时才翻源目录
+`ash
+cd D:/my-wiki
+python agents/wiki-agent.py  # Run a check on your knowledge base
+python migration/migrate.py  # Migrate old files to new structure
+python executor/executor.py  # Execute a protocol directly
+`
 
-## 三个域
+## Architecture
 
-| 域 MOC | 内容范围 | 子 MOC |
-|--------|---------|--------|
-| 🏠 Agent 记忆与认知 | Agent 怎么记、为何这样记（~25 页） | 记忆系统、认知机制 |
-| 🏠 Agent 系统工程 | Agent 怎么搭、怎么编排（~15 页） | Agent 架构与协作、工具与模式 |
-| 🏠 知识管理 | 知识怎么管、Wiki 怎么建（~15 页） | PKM 方法论、Wiki 工程、行业观察、市场信号 |
+`
+knowledge/  81 JSON sidecars — machine-readable metadata for every page
+protocol/   JSON protocol definitions — what the system can do
+executor/   Protocol Executor — runs protocol steps automatically
+state/      State files — what is happening right now
+memory/     Memory Store — what happened before (L0-L4)
+planner/    Planner — picks tasks, matches protocols, executes
+event-bus/  Event Bus — components communicate via typed events
+graphs/     Dependency Graph — 81 nodes, 380 edges of knowledge relationships
+`
 
-## 四个基础设施层
+## Make It Yours
 
-1. **AGENTS.md** — 启动文件，定义所有操作协议和触发规则，每个 AI 助手入站必读
-2. **hot.md** — 热缓存，存最近上下文、下次会话约定、当前待办。每次会话结束自动更新
-3. **index.md** — 全局目录，列出所有页面和入口。接问题时先翻这里定位
-4. **log.md** — 操作日志，记录每次摄入/检查/编辑/会话，新条目置顶。每月归档旧记录
+1. Fork the repo
+2. Add your own knowledge pages (Markdown with YAML frontmatter)
+3. Run python agents/wiki-agent.py check to validate
+4. Define your own protocols in protocol/*.json following protocol/TEMPLATE.json
+5. Add custom handlers in executor/executor.py
 
-## 七个操作协议（agents/ 目录，按需加载）
+No domain-specific code. Everything is pluggable.
 
-| 协议文件 | 触发词 | 功能 |
-|---------|--------|------|
-| capability-map.md | 任何外部工具调用前 | 确定目标场景的最优工具链 |
-| check-protocol.md | 检查、lint | 断链/孤儿页/衰老内容/矛盾检测 |
-| ingest-protocol.md | 吃进去、入库、ingest | 七步入库（抓取->归档->摘要->知识页->链接->标签->日志） |
-| wrapup-protocol.md | 收尾、结束、wrapup | 七步收尾（含 Prune 剪枝） |
-| context-budget.md | token 用量超 50K | 上下文预算管理和降级策略 |
-| knowledge-lifecycle-engine.md | 引擎运行 | 研究->挑刺->合成的知识演化流水线 |
-| 踩坑集.md | 重复失败 | 失败模式记录库，避免同类错误反复犯 |
+## Status
 
-## 当前状态（截至 2026-07-08）
-
-- **活跃开发中**。最近两周密集迭代：MOC 架构从混乱三域重构成统一维度 3 域 + 7 子 MOC；index 体系从模糊重定义为五层角色
-- **刚完成一次知识引擎实验运行**：4 个研究 Agent + 2 个挑刺 Agent + 1 个合成 Agent，产出 10 条改进建议
-- **最新研究入库**：翁荔《Harness Engineering for Self-Improvement》，核心发现——模型外脚手架（工作流、上下文管理、工具调用）的自我优化可能先于模型权重层的突破
-- **市场信号追踪系统**已建立基线，17 个追踪对象（项目/论文/产品）
-- **待办队列**：补充行业全景 4 个项目、做 Claude-Obsidian 对标分析、标签分层重构、4 篇 stub 页面补内容
-
-## 核心优势（为什么这样设计）
-
-1. **AI 原生**。整个 wiki 从第一天就按 AI 助手来维护设计，不是给人写的笔记迁移过来的。AGENTS.md + 协议文件体系让任何 AI 助手无需读完整库就能上手
-2. **五条公理驱动，非观点驱动**。架构设计从第一性原理推导，并经 Zettelkasten/PARA/Evergreen Notes/MOC 四大学派交叉验证
-3. **自我演化**。知识生命周期引擎能自动扫描外部信息、生成知识、对抗审查、合成改进建议；踩坑集 + protocol-gap 机制让工作流自己越跑越顺
-4. **热缓存加速**。hot.md 让 AI 助手 10 秒内恢复上次会话上下文，无需从头探索目录结构
-5. **OKF 兼容**。知识页遵循开放知识格式规范，支持跨工具互操作
+v0.3.0-develop. Phase 0-3 complete. See CHANGELOG.md for details.

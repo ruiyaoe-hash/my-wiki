@@ -77,6 +77,7 @@ class StateManager:
             self.release(filename, token)
 
     def validate(self, filename, data):
+        # TODO Phase 2: load state-schema.json and validate against it instead of hardcoded rules
         if filename == "current-task.json":
             return all(k in data for k in ["task_id","status","owner_agent"])
         if filename == "task-queue.json":
@@ -85,14 +86,49 @@ class StateManager:
             return all(k in data for k in ["session_id","status","agent"])
         return True
 
-    def merge(self, filename, updates, agent_id):
+    def merge(self, filename, updates, agent_id, base_version=None):
+        """Merge updates with optimistic concurrency via _version field.
+        Pass base_version to detect conflicts. Returns dict with success/conflict info."""
         current = self.read(filename)
         if current is None:
             current = {}
-        merged = {**current, **updates}
+        if base_version is not None:
+            if current.get('_version', 0) != base_version:
+                return {
+                    'success': False,
+                    'conflict': True,
+                    'message': f"Version mismatch: current={current.get('_version', 0)}, yours={base_version}",
+                    'current_data': current,
+                    'your_updates': updates
+                }
+        new_version = current.get('_version', 0) + 1
+        merged = {**current, **updates, '_version': new_version}
         if self.write(filename, merged, agent_id):
-            return merged
-        return None
+            return {'success': True, 'conflict': False, 'new_version': new_version, 'data': merged}
+        return {'success': False, 'conflict': False, 'message': 'Write failed'}
+
+    def batch_write(self, file_data_map, agent_id):
+        """Atomically write multiple state files. Returns True only if all succeed."""
+        locks = {}
+        try:
+            for filename in file_data_map:
+                token = self.acquire(filename, agent_id)
+                if not token:
+                    for fn, tok in locks.items():
+                        self.release(fn, tok)
+                    return False
+                locks[filename] = token
+            for filename, data in file_data_map.items():
+                if not self.validate(filename, data):
+                    return False
+                self._save_history(filename)
+                filepath = self.state_dir / filename
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            return True
+        finally:
+            for filename, token in locks.items():
+                self.release(filename, token)
 
     def _save_history(self, filename):
         hist_file = self.history_dir / f"{filename}.history"
@@ -131,3 +167,26 @@ class StateManager:
     def status(self):
         files = [f for f in os.listdir(self.state_dir) if f.endswith(".json")]
         return {"files": files}
+
+    def health_check(self):
+        """Return health status for every state file: readable, locked, history depth."""
+        result = {}
+        for fn in [f for f in os.listdir(self.state_dir) if f.endswith('.json')]:
+            fpath = self.state_dir / fn
+            lockfile = self.lock_dir / f'{fn}.lock'
+            hist_file = self.history_dir / f'{fn}.history'
+            info = {'readable': False, 'locked': False, 'history_depth': 0}
+            try:
+                with open(fpath, 'r', encoding='utf-8') as f:
+                    json.load(f)
+                info['readable'] = True
+            except Exception:
+                pass
+            info['locked'] = lockfile.exists()
+            if hist_file.exists():
+                try:
+                    info['history_depth'] = len(json.loads(hist_file.read_text(encoding='utf-8')))
+                except Exception:
+                    pass
+            result[fn] = info
+        return result

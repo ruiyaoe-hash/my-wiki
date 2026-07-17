@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "zep_开源记忆平台",
+  "title": "Zep 开源记忆平台",
+  "path": "Zep 开源记忆平台.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "开源",
+    "图记忆",
+    "企业级",
+    "Zep"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Agent记忆技术全景",
+    "Letta 状态化Agent",
+    "Mem0 记忆层",
+    "外部记忆-行业全景"
+  ],
+  "freshness_score": 1.0
+}

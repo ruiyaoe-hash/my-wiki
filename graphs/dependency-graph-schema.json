@@ -1,0 +1,67 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dependency Graph Schema",
+  "description": "??????? knowledge_id ? protocol_id?? A?B ?? A ?? B?A ? B ????/????",
+  "version": "0.1.0",
+  "node_schema": {
+    "node_id": {
+      "type": "string",
+      "description": "knowledge_id ? protocol_id"
+    },
+    "node_type": {
+      "type": "string",
+      "enum": [
+        "knowledge",
+        "protocol",
+        "source"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "???????"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "?? knowledge/ ? protocol/ ? JSON sidecar"
+    }
+  },
+  "edge_schema": {
+    "source": {
+      "type": "string",
+      "description": "from node_id"
+    },
+    "target": {
+      "type": "string",
+      "description": "to node_id"
+    },
+    "relation": {
+      "type": "string",
+      "enum": [
+        "depends_on",
+        "references",
+        "derived_from",
+        "implements"
+      ]
+    }
+  },
+  "graph_format": {
+    "description": "??? JSON??????????? + ????",
+    "file": "graphs/dependency.json",
+    "example": {
+      "nodes": [
+        {
+          "node_id": "agent_runtime_????",
+          "node_type": "knowledge",
+          "label": "Agent Runtime ????"
+        }
+      ],
+      "edges": [
+        {
+          "source": "state_?_memory_???",
+          "target": "agent_runtime_????",
+          "relation": "depends_on"
+        }
+      ]
+    }
+  }
+}

@@ -17,6 +17,7 @@
 
 进站时先读 state/session.json 判断会话状态，再读 state/current-task.json 恢复执行上下文。
 进度和 TODO 不再从 hot.md 读取——hot.md 从现在起只保留不可变的 Memory。
+如果 state/current-task.json 为空（	ask_id: null）且 task-queue.json 为空，则退回到 **下次工作计划.md** 寻找待办任务。
 
 ## 三个基础设施文件
 （AI 专用）

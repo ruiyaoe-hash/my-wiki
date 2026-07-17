@@ -1,0 +1,23 @@
+{
+  "knowledge_id": "coala_认知架构",
+  "title": "CoALA 认知架构",
+  "path": "CoALA 认知架构.md",
+  "created": "2026-06-27",
+  "updated": "2026-06-27",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "认知架构",
+    "Agent设计",
+    "记忆模块",
+    "学术论文"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Agent记忆技术全景",
+    "外部记忆-行业全景"
+  ],
+  "freshness_score": 1.0
+}

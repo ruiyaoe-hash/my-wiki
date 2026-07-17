@@ -1,0 +1,3 @@
+# Test
+
+Integration test article.

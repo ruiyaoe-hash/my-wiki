@@ -1,0 +1,28 @@
+{
+  "knowledge_id": "ai_meets_brain_综述",
+  "title": "AI Meets Brain 综述",
+  "path": "AI Meets Brain 综述.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "综述",
+    "认知科学",
+    "神经科学",
+    "学术论文",
+    "AGI"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "CoALA 认知架构",
+    "HippoRAG 记忆框架",
+    "FadeMem 生物启发遗忘",
+    "From Human Memory to AI Memory 综述",
+    "Memory in the Age of AI Agents 综述"
+  ],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,25 @@
+{
+  "knowledge_id": "harness_工程对我们的启示",
+  "title": "Harness 工程对我们的启示",
+  "path": "Harness 工程对我们的启示.md",
+  "created": "2026-07-08",
+  "updated": "2026-07-08",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "live",
+  "tags": [
+    "Harness Engineering",
+    "RSI",
+    "Agent",
+    "self-improvement",
+    "知识管理",
+    "文旅策划"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "源/原文/lilian-weng-harness-engineering-2026-07-04",
+    "Harness 工程"
+  ],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,25 @@
+{
+  "knowledge_id": "openrath",
+  "title": "OpenRath",
+  "path": "OpenRath.md",
+  "created": "2026-06-24",
+  "updated": "2026-06-24",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "mature",
+  "tags": [
+    "开源",
+    "Agent",
+    "清华",
+    "Session管理"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "OpenRath：多智能体系统的Session中心化革命——从Agent群聊到运行时控制平面",
+    "Session管理",
+    "AI持续学习",
+    "多智能体系统"
+  ],
+  "freshness_score": 1.0
+}

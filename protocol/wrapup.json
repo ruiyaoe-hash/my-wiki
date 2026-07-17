@@ -1,0 +1,56 @@
+{
+  "protocol_id": "wrapup",
+  "version": "1.0.0",
+  "description": "??????? hot.md + log.md + state + ??????",
+  "triggers": {
+    "keywords": [
+      "??",
+      "??",
+      "wrapup"
+    ]
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "update_hot_md",
+      "params": {},
+      "description": "?? hot.md ?????????"
+    },
+    {
+      "id": 2,
+      "action": "append_log",
+      "params": {
+        "file": "log.md"
+      },
+      "description": "log.md ??????"
+    },
+    {
+      "id": 3,
+      "action": "call_manager",
+      "params": {
+        "method": "read",
+        "file": "session.json"
+      },
+      "description": "??? session"
+    },
+    {
+      "id": 4,
+      "action": "call_manager",
+      "params": {
+        "method": "write",
+        "file": "session.json",
+        "data": "ended"
+      },
+      "description": "?? session ??"
+    },
+    {
+      "id": 5,
+      "action": "write_next_plan",
+      "params": {
+        "file": "??????.md"
+      },
+      "description": "???????"
+    }
+  ],
+  "raw_source": "agents/wrapup-protocol.md"
+}

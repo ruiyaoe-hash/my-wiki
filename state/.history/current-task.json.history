@@ -28,5 +28,206 @@
       "updated_at": "2026-07-16T00:00:00Z",
       "context": {}
     }
+  },
+  {
+    "timestamp": "2026-07-17T03:10:23.023163+00:00",
+    "data": {
+      "task_id": null,
+      "task_type": null,
+      "status": "completed",
+      "current_step": 0,
+      "total_steps": 0,
+      "progress": 1.0,
+      "owner_agent": "Codex",
+      "created_at": null,
+      "updated_at": "2026-07-16T23:59:00Z",
+      "context": {
+        "summary": "Phase 0+1 全部完成"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:25:43.039495+00:00",
+    "data": {
+      "task_id": "2026-07-17-review",
+      "task_type": "review",
+      "status": "running",
+      "current_step": 1,
+      "total_steps": 3,
+      "progress": 0.33,
+      "owner_agent": "Codex",
+      "created_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "context": {
+        "summary": "Phase 0+1 Review: ontology + state-manager + hot.md"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:32:51.696800+00:00",
+    "data": {
+      "task_id": "2026-07-17-review",
+      "task_type": "review",
+      "status": "completed",
+      "current_step": 1,
+      "total_steps": 3,
+      "progress": 1.0,
+      "owner_agent": "Codex",
+      "created_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:30:00Z",
+      "context": {
+        "summary": "Phase 0+1 Review: ontology + state-manager + hot.md"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:43:25.789106+00:00",
+    "data": {
+      "task_id": "2026-07-17-phase2",
+      "task_type": "build",
+      "status": "running",
+      "current_step": 1,
+      "total_steps": 5,
+      "progress": 0.0,
+      "owner_agent": "Codex",
+      "created_at": "2026-07-17T01:00:00Z",
+      "updated_at": "2026-07-17T01:00:00Z",
+      "context": {
+        "summary": "Phase 2: Knowledge Engine + Source + Graph Schema + Protocol ?? + Executor",
+        "decisions": {
+          "old_knowledge_migration": "Phase 2 ?????",
+          "graph_order": "Dependency Graph ??",
+          "protocol_executor": "Python"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:51:14.097081+00:00",
+    "data": {
+      "task_id": "2026-07-17-phase2",
+      "task_type": "build",
+      "status": "completed",
+      "current_step": 5,
+      "total_steps": 5,
+      "progress": 1.0,
+      "owner_agent": "Codex",
+      "created_at": "2026-07-17T01:00:00Z",
+      "updated_at": "2026-07-17T02:00:00Z",
+      "context": {
+        "summary": "Phase 2: Knowledge Engine + Source + Graph Schema + Protocol ?? + Executor",
+        "decisions": {
+          "old_knowledge_migration": "Phase 2 ?????",
+          "graph_order": "Dependency Graph ??",
+          "protocol_executor": "Python"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:54:23.155995+00:00",
+    "data": {
+      "task_id": "2026-07-17-phase3",
+      "task_type": "build",
+      "status": "running",
+      "current_step": 1,
+      "total_steps": 5,
+      "progress": 0.0,
+      "owner_agent": "Codex",
+      "created_at": "2026-07-17T02:10:00Z",
+      "updated_at": "2026-07-17T02:10:00Z",
+      "context": {
+        "summary": "Phase 3: Event Bus + Memory Store + Dependency Graph + Planner + Wiki Agent"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:54:23.167039+00:00",
+    "data": {
+      "task_id": "wiki-check-001",
+      "task_type": "check",
+      "status": "running",
+      "current_step": 0,
+      "total_steps": 5,
+      "progress": 0.0,
+      "owner_agent": "Planner",
+      "context": {
+        "task_id": "wiki-check-001",
+        "task_type": "check",
+        "priority": 1,
+        "description": "Wiki lint check: stale pages and broken links",
+        "created_at": "2026-07-17T03:00:00Z",
+        "context": {
+          "scope": "knowledge"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T03:54:41.197796+00:00",
+    "data": {
+      "task_id": "wiki-check-001",
+      "task_type": "check",
+      "status": "completed",
+      "current_step": 0,
+      "total_steps": 5,
+      "progress": 1.0,
+      "owner_agent": "Planner",
+      "context": {
+        "task_id": "wiki-check-001",
+        "task_type": "check",
+        "priority": 1,
+        "description": "Wiki lint check: stale pages and broken links",
+        "created_at": "2026-07-17T03:00:00Z",
+        "context": {
+          "scope": "knowledge"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-07-17T05:29:00.704001+00:00",
+    "data": {
+      "task_id": "wiki-check-001",
+      "task_type": "check",
+      "status": "completed",
+      "current_step": 5,
+      "total_steps": 5,
+      "progress": 1.0,
+      "owner_agent": "Planner",
+      "context": {
+        "task_id": "wiki-check-001",
+        "task_type": "check",
+        "priority": 1,
+        "description": "Wiki lint check: stale pages and broken links",
+        "created_at": "2026-07-17T03:00:00Z",
+        "context": {
+          "scope": "knowledge"
+        }
+      },
+      "updated_at": "2026-07-17T04:00:00Z"
+    }
+  },
+  {
+    "timestamp": "2026-07-17T05:29:00.719417+00:00",
+    "data": {
+      "task_id": "wiki-check-001",
+      "task_type": "check",
+      "status": "running",
+      "current_step": 0,
+      "total_steps": 5,
+      "progress": 0.0,
+      "owner_agent": "Planner",
+      "context": {
+        "task_id": "wiki-check-001",
+        "task_type": "check",
+        "priority": 1,
+        "description": "Wiki lint check: stale pages and broken links",
+        "created_at": "2026-07-17T03:00:00Z",
+        "context": {
+          "scope": "knowledge"
+        }
+      }
+    }
   }
 ]

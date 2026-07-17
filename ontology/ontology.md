@@ -35,7 +35,7 @@
 
 **生命周期：** 被记录（append）→ 被查询（Agent 想了解"之前做过什么"）→ 可能被归档（超过一定时间或数量后从 hot 迁到 archive）。Memory 不修改、不删除——发生过的事不能改写。
 
-**Owner：** Memory Store（Phase 1 实现的 State Manager 的一部分）。
+**Owner：** Memory Store（Phase 2 实现）。Phase 1 无 Memory 实现，仅概念占位。
 
 **Consumer：** Agent（恢复上下文）、你自己（回顾历史）、EVR 的 Extraction 步骤（从 Memory 中发现模式）。
 
@@ -61,6 +61,8 @@
 
 **Owner：** Session Manager（Phase 1 作为 State Store 的一部分实现）。
 
+**结构关系：** 一个 Session 包含 1..N 个 Task，每个 Task 有自己的瞬时 State。Session 结束时，它管理的所有 Task 的 State 必须已完成或显式中止。Session 是 State 的容器，自己也是 State Store 管理的一个对象。
+
 **Consumer：** Agent（知道自己在一个 Session 中）、EVR（从 Session 历史中萃取模式）、你自己（回顾"上次聊了什么"）。
 
 ---
@@ -72,6 +74,8 @@
 **生命周期：** 被定义（编写或从经验中萃取）→ 被使用（Agent 在执行 Task 时调用）→ 可能被弃用（发现更好的做法后标记为 deprecated）→ 被替换。Protocol 不会直接删除，只会标记弃用并保留历史版本。
 
 **Owner：** Protocol Registry（Phase 2 实现）。当前是你手动维护。
+
+**当前形态：** 7 个 Markdown 文件存放在 agents/ 目录，由 AGENTS.md 的按需加载规则管理。Phase 2 将迁移至 protocol/ 并升级为 YAML。
 
 **Consumer：** Planner（选择"用哪个 Protocol 来执行这个步骤"）、Agent（执行 Protocol 的具体步骤）。
 
@@ -89,7 +93,10 @@
 
 ---
 
-## 8. Event（事件）— Phase 3 预留
+## 8. Event（事件）
+
+> **核心组件。** Phase 1 搭框架（event-bus/stub.py），Phase 2 设计事件契约，Phase 3 正式启用。
+> Event Bus 与 State Store、Memory Store 并列为 Agent Runtime 的三核心基础设施。
 
 **一句话：** 系统内部发生某件事时发出的通知。"Task 完成了""知识页被更新了""Agent 崩溃了"——这些都是 Event。
 
@@ -99,8 +106,22 @@
 
 **Consumer：** Planner（监听到 Task 完成后自动开始下一步）、EVR（监听到异常模式后触发 Extraction）。
 
+
+## 9. Graph（图）— Phase 2 预留
+
+**一句话:** 对已有对象之间关系的结构化建模。四种 Graph（Knowledge/Capability/Workflow/Dependency）构成 Runtime 的导航层。
+
+**判定依据:** Runtime 在执行 Task 时需要按 Graph ID 找到它、查询节点和边（状态查询）、进行遍历和过滤（执行操作）。三项全满足 → 一等对象。
+
+**生命周期:** 被构建（从 Knowledge/Protocol/Task 中萃取关系）→ 被查询（Agent 做路由决策时查 Graph）→ 可能被更新（新知识入库后重新构建）。
+
+**Owner:** Knowledge Engine（Phase 2 实现）。
+
+**Consumer:** Planner（路由决策）、Agent（技能链选择）、EVR（从 Graph 结构中发现模式）。
+
 ---
 
 ## 版本记录
 
+- v0.2（2026-07-17）：Review 修正——Memory Owner 更正、Session/State 边界明确、Protocol 当前位置如实反映、Event 定位升级为核心组件、Graph 新增为第 9 号预留对象。
 - v0.1（2026-07-16）：Phase 0 初始版本。7 个确认对象 + 1 个预留对象。不含 Schema。

@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "agent记忆技术全景",
+  "title": "Agent记忆技术全景",
+  "path": "Agent记忆技术全景.md",
+  "created": "2026-06-27",
+  "updated": "2026-06-27",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "技术分类",
+    "认知架构",
+    "检索",
+    "框架"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "HippoRAG 记忆框架",
+    "Letta 状态化Agent",
+    "外部记忆-行业全景",
+    "Mem0 记忆层"
+  ],
+  "freshness_score": 1.0
+}

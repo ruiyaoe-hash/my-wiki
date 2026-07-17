@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "知识库跨域架构第一性原理",
+  "title": "知识库跨域架构第一性原理",
+  "path": "知识库跨域架构第一性原理.md",
+  "created": "2026-06-29",
+  "updated": "2026-06-29",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "evergreen",
+  "tags": [
+    "architecture",
+    "cross-domain",
+    "first-principles",
+    "wiki-design"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Evergreen Notes",
+    "Zettelkasten 方法",
+    "OKF开放知识格式",
+    "PARA 方法",
+    "MOC 地图笔记法",
+    "KEA架构与知识流转"
+  ],
+  "freshness_score": 1.0
+}

@@ -1,0 +1,27 @@
+{
+  "knowledge_id": "知识管理闭环蓝图",
+  "title": "知识管理闭环蓝图",
+  "path": "知识管理闭环蓝图.md",
+  "created": "2026-06-25",
+  "updated": "2026-06-25",
+  "type": "concept",
+  "domain": "meta",
+  "status": "developing",
+  "tags": [
+    "知识管理",
+    "Session",
+    "OKF",
+    "架构"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "Session管理",
+    "OpenRath",
+    "LLM Wiki模式",
+    "Wiki 进化 第 1 次运行",
+    "OKF开放知识格式",
+    "AI持续学习"
+  ],
+  "freshness_score": 1.0
+}

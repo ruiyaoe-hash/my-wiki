@@ -1,0 +1,32 @@
+{
+  "knowledge_id": "autogenetic记忆引擎",
+  "title": "AutoGenetic 记忆引擎（JiuwenMemory）",
+  "path": "AutoGenetic记忆引擎.md",
+  "created": "2026-07-02",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "growing",
+  "tags": [
+    "agent-memory",
+    "memory-engine",
+    "huawei",
+    "openjiuwen",
+    "auto-genetic",
+    "graph-memory",
+    "swarm"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "HippoRAG 记忆框架",
+    "LLM Wiki模式",
+    "Agent记忆技术全景",
+    "Memory as Metabolism 记忆代谢",
+    "Mem0 记忆层",
+    "jiuwenmemory-autoGenetic记忆引擎",
+    "OpenViking 上下文数据库",
+    "外部记忆-行业全景"
+  ],
+  "freshness_score": 1.0
+}

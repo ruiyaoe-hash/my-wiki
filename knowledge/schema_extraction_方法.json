@@ -1,0 +1,20 @@
+{
+  "knowledge_id": "schema_extraction_方法",
+  "title": "Schema Extraction 方法",
+  "path": "Schema Extraction 方法.md",
+  "created": "2026-07-10",
+  "updated": "2026-07-10",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "evergreen",
+  "tags": [
+    "ontology",
+    "schema",
+    "extraction",
+    "methodology"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [],
+  "freshness_score": 1.0
+}

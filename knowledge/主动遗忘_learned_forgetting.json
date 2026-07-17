@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "主动遗忘_learned_forgetting",
+  "title": "主动遗忘 Learned Forgetting",
+  "path": "主动遗忘 Learned Forgetting.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "主动遗忘",
+    "记忆衰减",
+    "生物启发",
+    "LRE"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "FadeMem 生物启发遗忘",
+    "Memory as Metabolism 记忆代谢",
+    "SCM 睡眠巩固记忆",
+    "AI记忆的遗忘曲线"
+  ],
+  "freshness_score": 1.0
+}

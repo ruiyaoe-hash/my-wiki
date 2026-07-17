@@ -1,0 +1,26 @@
+{
+  "knowledge_id": "反思记忆_reflective_memory",
+  "title": "反思记忆 Reflective Memory",
+  "path": "反思记忆 Reflective Memory.md",
+  "created": "2026-07-06",
+  "updated": "2026-07-06",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "反思",
+    "Reflection",
+    "元认知",
+    "Agent"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "自我演化记忆 Self-Evolving Memory",
+    "生成式Agent-Stanford小镇",
+    "CoALA 认知架构",
+    "Ralph Loop"
+  ],
+  "freshness_score": 1.0
+}

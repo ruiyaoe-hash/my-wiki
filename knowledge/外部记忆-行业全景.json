@@ -1,0 +1,36 @@
+{
+  "knowledge_id": "外部记忆-行业全景",
+  "title": "外部记忆行业全景：Wiki 范式的社区验证与前沿实践",
+  "path": "外部记忆-行业全景.md",
+  "created": "2026-06-27",
+  "updated": "2026-06-27",
+  "type": "concept",
+  "domain": "agent-engineering",
+  "status": "developing",
+  "tags": [
+    "知识管理",
+    "Agent记忆",
+    "OKF",
+    "Mem0",
+    "HippoRAG",
+    "Letta",
+    "行业分析"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "自媒体文章-知识库的三次解耦",
+    "CoALA 认知架构",
+    "知识管理闭环蓝图",
+    "Mesh Memory Protocol",
+    "HippoRAG 记忆框架",
+    "LLM Wiki模式",
+    "Agent记忆技术全景",
+    "OKF开放知识格式",
+    "Letta 状态化Agent",
+    "Mem0 记忆层",
+    "AI持续学习",
+    "OpenRath"
+  ],
+  "freshness_score": 1.0
+}

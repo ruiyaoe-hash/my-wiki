@@ -1,0 +1,25 @@
+{
+  "knowledge_id": "mem0_记忆层",
+  "title": "Mem0 记忆层",
+  "path": "Mem0 记忆层.md",
+  "created": "2026-06-27",
+  "updated": "2026-06-27",
+  "type": "concept",
+  "domain": "agent-memory",
+  "status": "developing",
+  "tags": [
+    "Agent记忆",
+    "Mem0",
+    "基础设施",
+    "实体链接",
+    "时间推理"
+  ],
+  "source_refs": [],
+  "dependencies": [],
+  "outgoing_links": [
+    "AI持续学习",
+    "外部记忆-行业全景",
+    "知识管理闭环蓝图"
+  ],
+  "freshness_score": 1.0
+}
