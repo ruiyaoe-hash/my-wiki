@@ -1,50 +1,101 @@
-# Agent Runtime ? Your Personal AI Operating System / ???? AI ????
+# Agent Runtime — 你的个人 AI 运行时 / Your Personal AI Runtime
 
-A general-purpose agent runtime that turns your markdown knowledge base into a self-maintaining, self-remembering system.
-???? Agent ??????? Markdown ?????????????????
+> 一套通用 Agent 运行时，把你的 Markdown 知识库变成能自维护、自记忆的系统。
+> A general-purpose agent runtime that turns your markdown knowledge base into a self-maintaining, self-remembering system.
 
 ---
 
-## What It Does / ?????
+## 它能做什么 / What It Does
 
-- **Auto-check** your knowledge base for stale pages and broken links / ????????????????
-- **Auto-ingest** any URL or local file into structured knowledge / ??? URL ?????????????
-- **Remember** what happened in every session (Memory Store L0-L4) / ???????????????????
-- **Coordinate** multiple AI agents without conflicts (StateManager + EventBus) / ???? AI Agent ?????
-- **Extend** with your own protocols (just write a JSON file) / ?????????????? JSON?
+- **自动检查** 知识库中的过期页面和断链 / Auto-check for stale pages and broken links
+- **自动入库** URL 或本地文件为结构化知识 / Auto-ingest any URL or local file into structured knowledge
+- **记住每次会话**（五层记忆存储 L0-L4） / Remember every session (Memory Store L0-L4)
+- **协调多个 AI Agent** 无冲突运行 / Coordinate multiple AI agents without conflicts
+- **自定义协议扩展**（只需写一个 JSON） / Extend with your own protocols
 
-## Quick Start / ????
+## 快速开始 / Quick Start
 
-`ash
+```bash
 git clone git@github.com:ruiyaoe-hash/my-wiki.git
 cd my-wiki
-python agents/wiki-agent.py  # Check your knowledge base / ???????
-python migration/migrate.py  # Migrate old files to new structure / ?????
-`
+python agents/wiki-agent.py  # 检查你的知识库
+python migration/migrate.py  # 迁移旧文件到新结构
+```
 
-## Architecture / ??
+## 架构 / Architecture
 
-`
-knowledge/  Metadata sidecars ? machine-readable metadata for every page / ??? JSON
-protocol/   Protocol definitions ? what the system can do / ????
-executor/   Protocol Executor ? runs protocol steps automatically / ?????
-state/      State files ? what is happening right now / ????
-memory/     Memory Store ? what happened before (L0-L4) / ????
-planner/    Planner ? picks tasks, matches protocols, executes / ????
-event-bus/  Event Bus ? components communicate via typed events / ????
-graphs/     Graph schemas ? knowledge relationship definitions / ?????
-`
+```
+knowledge/  元数据 JSON 侧影 - 每篇页面的机器可读元数据
+protocol/   协议定义 - 系统能做什么
+executor/   协议执行器 - 自动运行协议步骤
+state/      状态文件 - 当前发生了什么
+memory/     记忆存储 - 之前发生过什么 (L0-L4)
+planner/    编排引擎 - 取任务、匹配协议、执行
+event-bus/  事件总线 - 组件通信
+graphs/     图结构 - 知识关系定义
+```
 
-## Make It Yours / ??????
+## 让它成为你的 / Make It Yours
 
-1. Add your own knowledge pages (Markdown with YAML frontmatter) / ???????
-2. Run python agents/wiki-agent.py check to validate / ????
-3. Define your own protocols in protocol/*.json following protocol/TEMPLATE.json / ????
-4. Add custom handlers in executor/executor.py / ????????
+1. 添加你的知识页（Markdown + YAML frontmatter）
+2. 运行 `python agents/wiki-agent.py check` 检查
+3. 在 `protocol/*.json` 定义自己的协议，参考 `protocol/TEMPLATE.json`
+4. 在 `executor/executor.py` 添加自定义处理器
 
-No domain-specific code. Everything is pluggable. / ????????????
+**无行业锁定，一切可插拔。** / No domain-specific code. Everything is pluggable.
 
-## Status / ??
+---
 
-v1.0.1 ? Phase 0-3 complete. Clean public release. See [CHANGELOG.md](CHANGELOG.md).
-v1.0.1 ? Phase 0-3 ?????????????? [CHANGELOG.md](CHANGELOG.md)?
+# 项目起源：My Wiki 说明书 / Project Origin: My Wiki Manual
+
+> 以下是这个项目的原始设计说明。Agent Runtime 是在这个基础上演化而来的。
+> Below is the original design document. Agent Runtime evolved from this foundation.
+
+## 原始定位 / Original Vision
+
+一个**为 AI 助手设计的个人知识库**，研究主题聚焦 Agent 记忆系统、认知机制和工程实践。它不是给人翻阅的笔记堆，而是一个有协议、有生命周期的 AI 原生知识系统。
+
+## 三句话理解架构 / Architecture in Three Lines
+
+- **MOC 做导航**（按主题挑选核心内容），**Index 做库存**（完整列出所有页面）
+- **单 vault 平铺**——所有知识页在同一层目录，不按文件夹分类
+- **知识页 = 正文**，源/原文/ = 原始材料归档，源/摘要/ = AI 写的摘要
+
+## 三个域 / Three Domains
+
+| 域 MOC | 内容范围 | 子 MOC |
+|--------|---------|--------|
+| 记忆与认知 | Agent 怎么记、为何这样记 | 记忆系统、认知机制 |
+| 系统工程 | Agent 怎么搭、怎么编排 | 架构与协作、工具与模式 |
+| 知识管理 | 知识怎么管、Wiki 怎么建 | PKM 方法论、Wiki 工程、行业观察 |
+
+## 四个基础设施层 / Four Infrastructure Layers
+
+1. **AGENTS.md** — 启动文件，定义所有操作协议和触发规则
+2. **hot.md** — 热缓存，存最近上下文、下次会话约定
+3. **index.md** — 全局目录，列出所有页面和入口
+4. **log.md** — 操作日志，记录每次摄入/检查/编辑/会话
+
+## 七个操作协议 / Seven Protocols
+
+| 协议 | 触发词 | 功能 |
+|------|--------|------|
+| capability-map | 外部工具调用前 | 确定最优工具链 |
+| check-protocol | 检查、lint | 断链/孤儿页/衰老/矛盾检测 |
+| ingest-protocol | 入库、ingest | 七步入库 |
+| wrapup-protocol | 收尾、结束 | 七步收尾 |
+| context-budget | token > 50K | 上下文预算管理 |
+| knowledge-lifecycle | 引擎运行 | 研究→挑刺→合成 |
+| 踩坑集 | 重复失败 | 失败模式记录库 |
+
+## 进化历程 / Evolution
+
+- **v0.0-wiki** (2026-06) — 原始知识库，69 篇知识页，7 个协议
+- **v0.1.0** (2026-07-16) — Phase 0-1，Ontology + State Runtime
+- **v0.2.0** (2026-07-17) — Phase 2，Knowledge Engine + Protocol JSON + Executor
+- **v0.3.0** (2026-07-17) — Phase 3，Event Bus + Memory Store + Planner + WikiAgent
+- **v1.0.1** (2026-07-17) — 干净开源发布，38 文件纯运行时
+
+---
+
+当前版本: v1.0.1 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

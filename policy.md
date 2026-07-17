@@ -1,28 +1,10 @@
-﻿# Agent Runtime Policy v0.1
+# Agent Runtime Policy / ?? ? Agent Permission Matrix / ????
 
-## 权限矩阵（最简版）
+Defines which agents can access which files. / ???? Agent ?????????
 
-本文件定义哪些 Agent 可以操作哪些文件。Phase 1 手动维护，Phase 2 由 Policy Engine 自动管理。
-
-| Agent | state/ | knowledge/ | ontology/ | protocol/ | hot.md | 说明 |
+| Agent | state/ | knowledge/ | ontology/ | protocol/ | hot.md | Notes / ?? |
 |-------|--------|-----------|-----------|-----------|--------|------|
-| Wiki 维护 Agent | 读 | 读写 | 只读 | 只读 | 追加 | 自动入库、更新知识页 |
-| 文旅策划 Agent | 读 | 只读 | 只读 | 只读 | 无 | 读取知识，不修改系统 |
-| Human (你) | 全部 | 全部 | 全部 | 全部 | 全部 | 系统管理员 |
+| Wiki Agent / Wiki ?? | Read/? | Read+Write/?? | Read/?? | Read/?? | Append/?? | Auto ingest and update / ?????? |
+| Human / ?? | All/?? | All/?? | All/?? | All/?? | All/?? | System admin / ????? |
 
-## 操作类型
-
-- 读：允许读取文件内容
-- 写：允许修改文件内容
-- 追加：允许在文件末尾添加新条目（不修改已有内容）
-- 无：不允许任何操作
-
-## 默认规则
-
-- 未在权限矩阵中显式列出的 Agent，默认只有"读"权限
-- 任何 Agent 不得删除 state/ 的历史文件
-- Human 始终拥有全部权限
-
-## 版本记录
-
-- v0.1（2026-07-16）：Phase 1 最简版本
+Default: any unlisted agent gets Read-only. / ??????? Agent ???????
