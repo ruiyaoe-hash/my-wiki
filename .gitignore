@@ -26,7 +26,7 @@ wrapup-protocol.md
 memory/sessions/
 memory/project.json
 memory/semantic_index.json
-event-bus/history/
+event_bus/history/
 reports/
 source/original/
 source/summaries/

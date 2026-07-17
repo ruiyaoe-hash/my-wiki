@@ -10,7 +10,7 @@ This file tells any AI agent how to navigate and operate this system.
 - state/ — Runtime state (current task, session) / 运行时状态
 - memory/ — Memory Store L0-L4 / 记忆存储
 - planner/ — Task orchestration engine / 任务编排引擎
-- event-bus/ — Component communication / 组件通信
+- event_bus/ — Component communication / 组件通信
 - tests/ — Component test suite / 组件测试套件
 - scripts/ — Maintenance scripts (sidecar rebuild/validate, dependency graph) / 维护脚本（sidecar 重建与校验、依赖图生成）
 
@@ -19,8 +19,8 @@ This file tells any AI agent how to navigate and operate this system.
 Each runtime component documents its public API, events, and file I/O in its own INTERFACE.md:
 每个运行时组件在自己的 INTERFACE.md 中记录公开接口、事件与文件读写：
 
-- state-manager/INTERFACE.md — State coordination (lock/validate/merge/history/recover) / 状态协调
-- event-bus/INTERFACE.md — Pub/sub event bus / 发布订阅事件总线
+- state_manager/INTERFACE.md — State coordination (lock/validate/merge/history/recover) / 状态协调
+- event_bus/INTERFACE.md — Pub/sub event bus / 发布订阅事件总线
 - memory/INTERFACE.md — Memory Store L0-L4 / 五层记忆存储
 - executor/INTERFACE.md — Protocol Executor / 协议执行器
 - planner/INTERFACE.md — Task orchestration engine / 任务编排引擎

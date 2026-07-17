@@ -1,6 +1,6 @@
 # State Manager — Component Interface / 组件接口
 
-Source / 源码：`state-manager/manager.py`（State Manager v0.1）
+Source / 源码：`state_manager/manager.py`（State Manager v0.1）
 
 ## Responsibility / 职责
 

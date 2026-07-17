@@ -6,7 +6,7 @@ Thin wrapper around Planner. Has two core behaviors:
 2. run: process the task queue end-to-end
 
 CLI:
-    python agents/wiki-agent.py [--loop N] [--interval S] [--recover]
+    python agents/wiki_agent.py [--loop N] [--interval S] [--recover]
 
 --loop N      run N rounds (default 1); each round enqueues one check task
               and processes it via run_loop(max_tasks=1)

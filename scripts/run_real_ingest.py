@@ -13,8 +13,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / 'state-manager'))
-sys.path.insert(0, str(ROOT / 'event-bus'))
+sys.path.insert(0, str(ROOT / 'state_manager'))
+sys.path.insert(0, str(ROOT / 'event_bus'))
 sys.path.insert(0, str(ROOT / 'executor'))
 
 from executor import ProtocolExecutor  # noqa: E402

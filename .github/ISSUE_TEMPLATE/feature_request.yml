@@ -1,0 +1,15 @@
+name: Feature Request / 功能建议
+description: 提议新能力或新协议 / Propose a new capability or protocol
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 想解决什么问题 / What problem does this solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案 / Proposal
+      description: 如果是新协议，可直接贴 protocol JSON 草案 / For new protocols, paste a draft protocol JSON

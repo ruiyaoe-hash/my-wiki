@@ -11,7 +11,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-for _d in ('state-manager', 'event-bus', 'memory', 'executor', 'planner'):
+for _d in ('state_manager', 'event_bus', 'memory', 'executor', 'planner'):
     _p = str(BASE_DIR / _d)
     if _p not in sys.path:
         sys.path.insert(0, _p)
