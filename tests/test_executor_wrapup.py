@@ -79,7 +79,8 @@ class TestExecutorWrapup(unittest.TestCase):
         self.assertIn('- 会话:', content2)
 
     def test_log_md_appends_one_line_per_run(self):
-        before = len(self.log.read_text(encoding='utf-8').splitlines())
+        # Fresh clones have no log.md (personal runtime file, untracked)
+        before = len(self.log.read_text(encoding='utf-8').splitlines()) if self.log.exists() else 0
         ok, _ = self._run_wrapup()
         self.assertTrue(ok)
         after = len(self.log.read_text(encoding='utf-8').splitlines())
