@@ -159,5 +159,23 @@ class TestExecutorHtmlAndSidecar(unittest.TestCase):
         self.assertEqual(sc['outgoing_links'], ['LinkA'])
 
 
+    def test_update_index_creates_missing_index(self):
+        """Fresh-clone repos have no index.md (personal content is untracked);
+        update_index must create a minimal index instead of silently no-oping."""
+        ip = BASE / 'index.md'
+        backup = helpers.backup_file(ip)
+        try:
+            if ip.exists():
+                ip.unlink()
+            ex = ProtocolExecutor()
+            r = ex._handle_update_index({'new_page_title': 'Index Creation Test'})
+            self.assertTrue(r['updated'])
+            text = ip.read_text(encoding='utf-8')
+            self.assertIn('## 新入库', text)
+            self.assertIn('[[Index Creation Test]]', text)
+        finally:
+            helpers.restore_file(ip, backup)
+
+
 if __name__ == '__main__':
     unittest.main()

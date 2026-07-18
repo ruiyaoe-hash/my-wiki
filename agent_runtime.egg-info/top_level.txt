@@ -1,6 +1,0 @@
-agents
-event_bus
-executor
-memory
-planner
-state_manager

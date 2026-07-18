@@ -297,9 +297,14 @@ class ProtocolExecutor:
         return {'sidecar_path': str(dest.relative_to(BASE_DIR))}
     def _handle_update_index(self, p):
         title = p.get('new_page_title', 'New Page'); ip = BASE_DIR / 'index.md'
-        if not ip.exists(): return {'updated': False}
+        if not ip.exists():
+            # 新用户仓库可能没有 index.md（个人内容不入库）：创建最小索引
+            with open(ip, 'w', encoding='utf-8') as f:
+                f.write('# 知识库索引\n\n## 新入库\n')
         with open(ip, 'r', encoding='utf-8') as f: content = f.read()
-        content = content.replace('## 新入库\n', f'## 新入库\n- [[{title}]] — Agent Runtime 自动入库\n')
+        if '## 新入库\n' not in content:
+            content = content.rstrip() + '\n\n## 新入库\n'
+        content = content.replace('## 新入库\n', f'## 新入库\n- [[{title}]] — Agent Runtime 自动入库\n', 1)
         with open(ip, 'w', encoding='utf-8') as f: f.write(content)
         return {'updated': True}
     def _handle_emit_event(self, p):
