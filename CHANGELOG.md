@@ -7,6 +7,21 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
+## [1.2.2] — 2026-07-18
+
+新用户视角验证（fresh clone 走 QUICKSTART）驱动的清理与修复。
+
+### Fixed
+- 仓库清理：untrack 5 个个人痕迹文件（hot.md / log.md / index.md / milestones.md / BOOTSTRAP.md，本地保留）；untrack 误提交的 agent_runtime.egg-info（.gitignore 补 `*.egg-info/`）
+- update_index：index.md 缺失时自动创建最小索引（新用户 clone 后 ingest 的索引步骤不再静默跳过）
+
+### Added
+- README 顶部"30 秒看懂"定位段：是什么 / 适合谁 / 三步上手 / 诚实边界
+- QUICKSTART 补 Windows 控制台中文乱码说明（chcp 65001 / PYTHONIOENCODING）
+- 回归测试 ×1（update_index 自建索引）；测试总数 31 → 32
+
+---
+
 ## [1.2.1] — 2026-07-18
 
 首次 dogfood（真实 URL 入库 + 巡检）驱动的修复轮。

@@ -12,6 +12,9 @@ pip install -e .        # 提供 agent-runtime 命令；也可以不装，直接
 
 要求：Python ≥ 3.10，无第三方依赖。/ Requires Python ≥ 3.10. Zero third-party dependencies.
 
+> Windows 用户：如果控制台中文显示为乱码，先执行 `chcp 65001` 或设环境变量
+> `PYTHONIOENCODING=utf-8`——这只是显示问题，写入的文件均为正常 UTF-8。
+
 ## 2. 第一次运行 / First Run
 
 ```bash

@@ -8,6 +8,25 @@
 
 ---
 
+## 30 秒看懂 / TL;DR
+
+**这是什么**：一个住在你 Markdown 笔记库里的"自动图书管理员"——定时巡检（过期页/断链）、一键把外部文章变成结构化笔记（原文→摘要→知识页→索引）、并记住它每次干过什么。
+
+**适合谁**：
+- 用 Obsidian / 任何 Markdown 笔记、想要自动保养的人
+- 想搭自己的 Agent、需要状态/记忆/事件/协议编排基础设施的开发者
+
+**三步上手**：
+```bash
+pip install -e .
+agent-runtime
+python scripts/ingest.py ./article.md --title "第一篇文章"
+```
+
+**诚实边界**：没有图形界面；不内置大模型（可选配 OpenAI 兼容接口做 AI 摘要）；愿景中的 "Agent OS" 还在路线图上——v1.x 是一个可靠的知识库维护运行时。
+
+---
+
 ## 它能做什么 / What It Does
 
 - **自动检查** 知识库中的过期页面和断链 / Auto-check for stale pages and broken links
@@ -112,4 +131,4 @@ python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
 
 ---
 
-当前版本: v1.2.1 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)
+当前版本: v1.2.2 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

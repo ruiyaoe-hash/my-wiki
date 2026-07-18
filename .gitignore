@@ -47,6 +47,7 @@ my-wiki/
 __pycache__/
 *.pyc
 *.pyo
+*.egg-info/
 
 # Obsidian workspace
 .obsidian/workspace.json
