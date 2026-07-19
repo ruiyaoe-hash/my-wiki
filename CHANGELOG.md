@@ -7,15 +7,17 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
-## [Unreleased]
+## [1.3.0] — 2026-07-19
 
 ### Fixed
 - 输出编码自配置：executor 入口对 stdout/stderr 做 `reconfigure(encoding='utf-8', errors='replace')`，中文协议日志在 Windows 控制台(GBK)与 CI 重定向(cp1252)下不再乱码或抛 UnicodeEncodeError，不再依赖 PYTHONIOENCODING 外部环境变量
+- 控制台页面内联 JS 语法错误（`&&` 与 `??` 裸混）导致页面整体卡死在"加载中"；页面取不到数据时改为明确提示"连不上后台服务"；新增 node --check 语法测试兜底（tests/test_console.py 现共 9 用例）
 
 ### Added
 - AGENTS.md 新增"Working Agreement / 合作方式"一节（沟通、执行风格、Git/分支/编码/诚实/发布六条纪律）
 - 结构化命令层（v1.3.0 Step 1，agents/cli.py）：`agent-runtime` 扩展为子命令结构 check / ingest / wrapup / status / run，全部薄分发到现有 Executor/Planner；check/ingest/wrapup/status 支持 `--json` 机器可读输出（供后续网页控制台调用）；裸 `agent-runtime` 与旧式参数（--loop/--interval/--recover）自动映射 run 子命令，旧用法零影响；入口从 agents.wiki_agent:main 切换到 agents.cli:main；新增 tests/test_cli.py 共 12 用例
 - 网页控制台（v1.3.0 Step 2，console/server.py）：`agent-runtime console` 启动本地网页（stdlib http.server，只监听 127.0.0.1，零前端依赖）；按钮从 protocol/*.json 声明式生成，点按钮等价于执行对应 `--json` 子命令；健康总览展示会话/任务/队列/事件/stale/断链与最近事件流；ingest 配表单；写操作三层保护（前端二次确认 + state/console-log.jsonl 操作日志 + 全局执行锁）；无映射协议展示为"仅自动触发"；端口被占自动顺延；新增 tests/test_console.py 共 8 用例
+- `启动控制台.bat`：Windows 双击启动器，免终端打开控制台（黑窗口即服务进程，关掉即停止）
 
 ---
 
