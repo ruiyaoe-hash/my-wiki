@@ -198,23 +198,32 @@ PAGE = """<!doctype html>
 
 <script>
 async function loadStatus(){
-  const r = await fetch('/api/status'); const s = await r.json();
-  const e = s.execution||{}, c = s.report_counts||{}, ses = s.session||{};
-  document.getElementById('health').innerHTML =
-    stat('会话', (ses.session_id||'?')+'（'+(ses.status||'?')+'）') +
-    stat('累计任务', (e.tasks_processed??0)+' 个 / '+(e.sessions_total??0)+' 会话') +
-    stat('待办队列', (s.planner&&s.planner.queue_size??0)+' 个') +
-    stat('落盘事件', (s.events_persisted??0)+' 条') +
-    stat('stale 页', c.stale_count??'?') +
-    stat('断链', c.broken_count??'?') +
-    stat('最新报告', s.latest_report||'无');
-  const ev = document.getElementById('events');
-  ev.innerHTML = (s.recent_events||[]).map(x =>
-    '<li>'+esc(x.time)+' · '+esc(x.type)+' · '+esc(x.source)+'</li>').join('') ||
-    '<li>（无）</li>';
-  const ar = await fetch('/api/protocols'); const ps = await ar.json();
-  document.getElementById('actions').innerHTML = ps.map(renderAction).join('');
-  loadLog();
+  try{
+    const r = await fetch('/api/status'); const s = await r.json();
+    const e = s.execution||{}, c = s.report_counts||{}, ses = s.session||{};
+    document.getElementById('health').innerHTML =
+      stat('会话', (ses.session_id||'?')+'（'+(ses.status||'?')+'）') +
+      stat('累计任务', (e.tasks_processed??0)+' 个 / '+(e.sessions_total??0)+' 会话') +
+      stat('待办队列', (s.planner?s.planner.queue_size:0)+' 个') +
+      stat('落盘事件', (s.events_persisted??0)+' 条') +
+      stat('stale 页', c.stale_count??'?') +
+      stat('断链', c.broken_count??'?') +
+      stat('最新报告', s.latest_report||'无');
+    const ev = document.getElementById('events');
+    ev.innerHTML = (s.recent_events||[]).map(x =>
+      '<li>'+esc(x.time)+' · '+esc(x.type)+' · '+esc(x.source)+'</li>').join('') ||
+      '<li>（无）</li>';
+    const ar = await fetch('/api/protocols'); const ps = await ar.json();
+    document.getElementById('actions').innerHTML = ps.map(renderAction).join('');
+    loadLog();
+  }catch(err){
+    document.getElementById('health').innerHTML =
+      '<b style="color:#b03030">连不上后台服务了</b><div class="stat">'+
+      '网页只是脸面，发动机（控制台服务）没在跑。'+
+      '双击仓库里的「启动控制台.bat」，或终端执行 agent-runtime console，'+
+      '然后按 Ctrl+F5 强制刷新本页。（'+esc(String(err))+'）</div>';
+    document.getElementById('actions').innerHTML = '';
+  }
 }
 function stat(k,v){return '<div class="stat">'+esc(k)+'<b>'+esc(String(v))+'</b></div>';}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
