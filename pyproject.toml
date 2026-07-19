@@ -25,7 +25,7 @@ Repository = "https://github.com/ruiyaoe-hash/my-wiki"
 Issues = "https://github.com/ruiyaoe-hash/my-wiki/issues"
 
 [project.scripts]
-agent-runtime = "agents.wiki_agent:main"
+agent-runtime = "agents.cli:main"
 
 [tool.setuptools]
 packages = ["agents", "planner", "executor", "event_bus", "memory", "state_manager"]

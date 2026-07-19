@@ -14,6 +14,7 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ### Added
 - AGENTS.md 新增"Working Agreement / 合作方式"一节（沟通、执行风格、Git/分支/编码/诚实/发布六条纪律）
+- 结构化命令层（v1.3.0 Step 1，agents/cli.py）：`agent-runtime` 扩展为子命令结构 check / ingest / wrapup / status / run，全部薄分发到现有 Executor/Planner；check/ingest/wrapup/status 支持 `--json` 机器可读输出（供后续网页控制台调用）；裸 `agent-runtime` 与旧式参数（--loop/--interval/--recover）自动映射 run 子命令，旧用法零影响；入口从 agents.wiki_agent:main 切换到 agents.cli:main；新增 tests/test_cli.py 共 12 用例
 
 ---
 
