@@ -7,6 +7,16 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
+## [Unreleased]
+
+### Fixed
+- 输出编码自配置：executor 入口对 stdout/stderr 做 `reconfigure(encoding='utf-8', errors='replace')`，中文协议日志在 Windows 控制台(GBK)与 CI 重定向(cp1252)下不再乱码或抛 UnicodeEncodeError，不再依赖 PYTHONIOENCODING 外部环境变量
+
+### Added
+- AGENTS.md 新增"Working Agreement / 合作方式"一节（沟通、执行风格、Git/分支/编码/诚实/发布六条纪律）
+
+---
+
 ## [1.2.2] — 2026-07-18
 
 新用户视角验证（fresh clone 走 QUICKSTART）驱动的清理与修复。

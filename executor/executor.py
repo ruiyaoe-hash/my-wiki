@@ -10,6 +10,15 @@ import sys, os, json, re, urllib.request
 from datetime import datetime, date, timezone
 from html.parser import HTMLParser
 from pathlib import Path
+
+# 输出编码自配置：Windows 控制台(GBK)与 CI 重定向(cp1252)下 stdout 默认非
+# UTF-8，中文协议日志会乱码甚至 UnicodeEncodeError。reconfigure 保底，不再
+# 依赖 PYTHONIOENCODING 等外部环境变量。
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'state_manager'))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'event_bus'))
 PROTOCOL_DIR = Path(__file__).resolve().parent.parent / 'protocol'

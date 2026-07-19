@@ -46,3 +46,15 @@ When entering, read in this order / 进站时按此顺序读取：
 - Encoding: always UTF-8 for non-ASCII text / 非 ASCII 文本一律 UTF-8
 - Chinese paths: use cmd /c or apply_patch, never PowerShell here-string
 - Git: git rm --cached before branch switch is dangerous / git rm --cached 后切换分支危险
+
+## Working Agreement / 合作方式
+
+与库主协作的约定（2026-07-18 沉淀，双方确认）：
+
+- 沟通：中文；解释用大白话（库主非技术背景），代码/命令/标识符保持原样
+- 执行风格：小步可见，每步一句话进展；大任务拆小——不派"黑盒"长任务子代理（中途不可见，曾被误认为卡死）
+- Git 纪律：commit/merge/tag/push/rm 等变更类操作先说明再执行，一次确认只管当次；**merge 后立刻跑测试**
+- 分支纪律：develop 施工，验收通过当天合 main 打 tag，不倒挂过夜
+- 编码纪律：一律 UTF-8；不用 PowerShell here-string 写文件；Python 先写 .py 再跑；rm --cached 后立即提交且不切分支
+- 诚实纪律：宣称必须有运行证据（测试/文件/输出）；没验证过的部分明说没验证
+- 发布纪律：对外动作（push、Release、改 GitHub 设置）单独确认
