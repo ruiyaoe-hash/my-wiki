@@ -8,6 +8,7 @@
     agent-runtime ingest <url_or_path> --title T [--domain D] [--tags a,b]
     agent-runtime wrapup      跑 wrapup 协议（会话收尾归档）
     agent-runtime status      系统状态总览（state/ + 最新检查报告）
+    agent-runtime console     启动网页控制台（本地网页，按钮 + 健康总览）
     agent-runtime run [--loop N] [--interval S] [--recover]   旧版循环模式
 
 兼容旧用法：裸 `agent-runtime` 或首参数以 - 开头（如 --loop 10）
@@ -33,7 +34,7 @@ for _d in ('agents', 'planner', 'executor', 'state_manager', 'event_bus', 'memor
 
 from executor import ProtocolExecutor  # noqa: E402  # import 即完成 stdout 编码自配置
 
-SUBCOMMANDS = ('run', 'check', 'ingest', 'wrapup', 'status')
+SUBCOMMANDS = ('run', 'check', 'ingest', 'wrapup', 'status', 'console')
 
 
 def _normalize_argv(argv):
@@ -181,6 +182,12 @@ def _cmd_status(args):
     return 0
 
 
+def _cmd_console(args):
+    sys.path.insert(0, str(BASE / 'console'))
+    from server import serve
+    return serve(port=args.port, open_browser=not args.no_browser)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(
         prog='agent-runtime', description=__doc__,
@@ -212,10 +219,17 @@ def main(argv=None):
     p_st = sub.add_parser('status', help='系统状态总览')
     p_st.add_argument('--json', action='store_true', help='机器可读 JSON 输出')
 
+    p_con = sub.add_parser('console', help='启动网页控制台（本地网页，按钮操作 + 健康总览）')
+    p_con.add_argument('--port', type=int, default=8765,
+                       help='起始端口（默认 8765，被占则顺延）')
+    p_con.add_argument('--no-browser', action='store_true',
+                       help='不自动打开浏览器')
+
     args = parser.parse_args(
         _normalize_argv(sys.argv[1:] if argv is None else argv))
     handler = {'run': _cmd_run, 'check': _cmd_check, 'ingest': _cmd_ingest,
-               'wrapup': _cmd_wrapup, 'status': _cmd_status}[args.command]
+               'wrapup': _cmd_wrapup, 'status': _cmd_status,
+               'console': _cmd_console}[args.command]
     return handler(args)
 
 

@@ -13,6 +13,7 @@ This file tells any AI agent how to navigate and operate this system.
 - event_bus/ — Component communication / 组件通信
 - tests/ — Component test suite / 组件测试套件
 - scripts/ — Maintenance scripts (sidecar rebuild/validate, dependency graph) / 维护脚本（sidecar 重建与校验、依赖图生成）
+- console/ — Web console (local web UI over the CLI) / 网页控制台（命令层之上的本地网页界面）
 
 ## Component Interfaces / 组件接口
 
@@ -24,6 +25,7 @@ Each runtime component documents its public API, events, and file I/O in its own
 - memory/INTERFACE.md — Memory Store L0-L4 / 五层记忆存储
 - executor/INTERFACE.md — Protocol Executor / 协议执行器
 - planner/INTERFACE.md — Task orchestration engine / 任务编排引擎
+- console/INTERFACE.md — Web console (local web UI) / 网页控制台
 
 ## Entry Protocol / 进站协议
 
