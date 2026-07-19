@@ -19,11 +19,13 @@
 **三步上手**：
 ```bash
 pip install -e .
-agent-runtime
-python scripts/ingest.py ./article.md --title "第一篇文章"
+agent-runtime console    # 打开本地网页控制台：点按钮跑协议、看健康总览
+agent-runtime ingest ./article.md --title "第一篇文章"
 ```
 
-**诚实边界**：没有图形界面；不内置大模型（可选配 OpenAI 兼容接口做 AI 摘要）；愿景中的 "Agent OS" 还在路线图上——v1.x 是一个可靠的知识库维护运行时。
+**界面**：本地网页控制台（`agent-runtime console`，只监听 127.0.0.1）+ 结构化命令行（check / ingest / wrapup / status）；Windows 用户可直接双击 `启动控制台.bat`。
+
+**诚实边界**：不内置大模型（可选配 OpenAI 兼容接口做 AI 摘要）；愿景中的 "Agent OS" 还在路线图上——v1.x 是一个可靠的知识库维护运行时。
 
 ---
 
@@ -41,7 +43,8 @@ python scripts/ingest.py ./article.md --title "第一篇文章"
 git clone git@github.com:ruiyaoe-hash/my-wiki.git
 cd my-wiki
 pip install -e .        # 安装为命令行工具 agent-runtime（可选）
-python agents/wiki_agent.py  # 检查你的知识库（或：agent-runtime）
+agent-runtime check     # 检查你的知识库（或：python agents/wiki_agent.py）
+agent-runtime console   # 或打开网页控制台，点按钮操作
 ```
 
 ## 架构 / Architecture
@@ -54,6 +57,8 @@ state/      状态文件 - 当前发生了什么
 memory/     记忆存储 - 之前发生过什么 (L0-L4)
 planner/    编排引擎 - 取任务、匹配协议、执行
 event_bus/  事件总线 - 组件通信
+console/    网页控制台 - 本地网页界面（按钮 + 健康总览）
+agents/     命令层 - agent-runtime 子命令入口
 graphs/     图结构 - 知识关系定义
 ```
 
@@ -69,10 +74,11 @@ graphs/     图结构 - 知识关系定义
 ## 开发 / Development
 
 ```bash
-python -m unittest discover tests      # 运行测试套件（29 用例）
+python -m unittest discover tests      # 运行测试套件（53 用例）
+agent-runtime status                   # 系统状态总览（--json 机器可读）
 python scripts/build_graph.py          # 从 sidecar 重建依赖图
 python scripts/rebuild_sidecars.py     # 从 md frontmatter 重建 sidecar
-python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
+agent-runtime run --loop 10 --interval 60   # 多轮自动运行（旧式 --loop 10 也兼容）
 ```
 
 每个组件的公开接口见对应目录下的 `INTERFACE.md`。/ Public interfaces: see `INTERFACE.md` in each component directory.
@@ -131,4 +137,4 @@ python agents/wiki_agent.py --loop 10 --interval 60   # 多轮自动运行
 
 ---
 
-当前版本: v1.2.2 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)
+当前版本: v1.3.0 | 许可证: MIT | [CHANGELOG](CHANGELOG.md) | [Releases](https://github.com/ruiyaoe-hash/my-wiki/releases)

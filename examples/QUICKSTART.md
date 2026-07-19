@@ -12,18 +12,29 @@ pip install -e .        # 提供 agent-runtime 命令；也可以不装，直接
 
 要求：Python ≥ 3.10，无第三方依赖。/ Requires Python ≥ 3.10. Zero third-party dependencies.
 
-> Windows 用户：如果控制台中文显示为乱码，先执行 `chcp 65001` 或设环境变量
-> `PYTHONIOENCODING=utf-8`——这只是显示问题，写入的文件均为正常 UTF-8。
+> Windows 用户：`agent-runtime` 各子命令已自动把输出设为 UTF-8，不再乱码。
+> 个别维护脚本（scripts/*.py）如仍显示乱码，先执行 `chcp 65001`——这只是显示问题，
+> 写入的文件均为正常 UTF-8。
 
 ## 2. 第一次运行 / First Run
 
 ```bash
-agent-runtime                      # 等价于 python agents/wiki_agent.py
+agent-runtime                      # 等价于 python agents/wiki_agent.py（旧用法兼容）
+agent-runtime console              # 或打开网页控制台：点按钮跑协议、看健康总览
 ```
 
 效果：Planner 开一个 session → 出队一个 check 任务 → Executor 跑 `protocol/check.json`
 → 生成 `reports/check-<日期>.md` → 事件追加到 `event_bus/history/events.jsonl`
 → `state/execution-status.json` 计数 +1。
+
+常用子命令 / Subcommands：
+
+```bash
+agent-runtime check      # 跑一次健康检查
+agent-runtime status     # 系统状态总览（--json 机器可读）
+agent-runtime wrapup     # 会话收尾归档
+agent-runtime console    # 网页控制台（Windows 也可双击 启动控制台.bat）
+```
 
 ## 3. 放入你的知识页 / Add Your Knowledge
 
@@ -55,7 +66,8 @@ python scripts/validate_sidecars.py
 ## 4. 入库一篇外部材料 / Ingest External Content
 
 ```bash
-python scripts/ingest.py ./article.md --title "文章标题" --domain knowledge-management --tags demo
+agent-runtime ingest ./article.md --title "文章标题" --domain knowledge-management --tags demo
+# 旧入口仍可用：python scripts/ingest.py ./article.md --title "文章标题" ...
 ```
 
 协议五步自动完成：抓原文（`source/original/`）→ 结构化摘要（`source/summaries/`）
@@ -67,8 +79,8 @@ python scripts/ingest.py ./article.md --title "文章标题" --domain knowledge-
 ## 5. 让它自己跑 / Let It Run
 
 ```bash
-agent-runtime --loop 10 --interval 60    # 连续 10 轮，每轮间隔 60 秒
-agent-runtime --recover                  # 上次被 kill？先恢复再跑
+agent-runtime run --loop 10 --interval 60    # 连续 10 轮，每轮间隔 60 秒（旧式 --loop 10 兼容）
+agent-runtime run --recover                  # 上次被 kill？先恢复再跑
 ```
 
 ## 6. 验证一切正常 / Verify
