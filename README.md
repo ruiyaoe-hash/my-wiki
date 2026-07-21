@@ -3,8 +3,9 @@
 [![tests](https://github.com/ruiyaoe-hash/my-wiki/actions/workflows/test.yml/badge.svg)](https://github.com/ruiyaoe-hash/my-wiki/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> 一套通用 Agent 运行时，把你的 Markdown 知识库变成能自维护、自记忆的系统。
-> A general-purpose agent runtime that turns your markdown knowledge base into a self-maintaining, self-remembering system.
+> Agent 时代的可信信源工作区：把你的 Markdown 知识库变成可信、可累积、可追溯的研究资产。
+> 生成无限的时代，可信是新的稀缺——这套系统给信息做质检（来源分级 + 核实标注 + 证伪留痕），并让研究过程全程沉淀。
+> A trusted-source workspace for the agent era: turns your markdown knowledge base into verifiable, accumulative, traceable research assets.
 
 ---
 

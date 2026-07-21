@@ -13,6 +13,7 @@ This file tells any AI agent how to navigate and operate this system.
 - event_bus/ — Component communication / 组件通信
 - tests/ — Component test suite / 组件测试套件
 - scripts/ — Maintenance scripts (sidecar rebuild/validate, dependency graph) / 维护脚本（sidecar 重建与校验、依赖图生成）
+- MAP.md — Repo map in plain language (every folder: what/who/what-if-deleted) / 仓库地图（每个文件夹：干什么、给谁看、删了会怎样）
 - console/ — Web console (local web UI over the CLI) / 网页控制台（命令层之上的本地网页界面）
 
 ## Component Interfaces / 组件接口
@@ -48,6 +49,7 @@ When entering, read in this order / 进站时按此顺序读取：
 - Encoding: always UTF-8 for non-ASCII text / 非 ASCII 文本一律 UTF-8
 - Chinese paths: use cmd /c or apply_patch, never PowerShell here-string
 - Git: git rm --cached before branch switch is dangerous / git rm --cached 后切换分支危险
+- New top-level folders must be registered in MAP.md first / 新增顶层文件夹必须先在 MAP.md 登记
 
 ## Working Agreement / 合作方式
 
