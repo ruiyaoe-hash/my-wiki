@@ -28,6 +28,7 @@ memory/project.json
 memory/semantic_index.json
 event_bus/history/
 reports/
+state/console-log.jsonl
 source/original/
 source/summaries/
 graphs/dependency.json

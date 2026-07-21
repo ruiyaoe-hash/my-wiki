@@ -241,6 +241,13 @@ def build_sidecar(md_path):
     desc = _norm_scalar(fm.get("description"))
     if desc is not None:
         sidecar["description"] = desc
+    # 入库标准 v0.1 认知状态字段（docs/ingest-standard-v0.1.md）
+    for key in ("source_tier", "verification", "verified_at", "confidence"):
+        val = _norm_scalar(fm.get(key))
+        if val in ("null", "None"):
+            val = None  # frontmatter 里的占位 null 不落进 sidecar
+        if val is not None:
+            sidecar[key] = val
     return sidecar, warnings
 
 

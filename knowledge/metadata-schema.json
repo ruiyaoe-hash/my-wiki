@@ -104,6 +104,26 @@
       "minimum": 0,
       "maximum": 1,
       "description": "Computed from updated: <=90d = 1.0, 90-180d = 0.7, 180-365d = 0.4, >365d = 0.1; unparseable/missing date = 0.5"
+    },
+    "source_tier": {
+      "type": ["string", "null"],
+      "enum": ["T1", "T2", "T3", "T4", null],
+      "description": "入库标准 v0.1 来源分级：T1 一手学术/官方，T2 权威机构/一手工程，T3 自媒体/二手，T4 不明或本地；入库时由 executor 按来源域名自动打标"
+    },
+    "verification": {
+      "type": ["string", "null"],
+      "enum": ["unverified", "verified", "contested", "falsified", null],
+      "description": "核实状态：unverified(默认) / verified / contested / falsified；升级需交叉印证或 T1 未撤稿，见 docs/ingest-standard-v0.1.md"
+    },
+    "verified_at": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "最近一次核实日期；unverified 时为 null；超过 180 天应降级复查"
+    },
+    "confidence": {
+      "type": ["string", "null"],
+      "enum": ["high", "medium", "low", null],
+      "description": "置信度评估（AI 或人填，默认 low）"
     }
   },
   "required": [
