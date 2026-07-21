@@ -139,6 +139,27 @@ def _cmd_wrapup(args):
     return 0 if ok else 1
 
 
+def _epistemic_stats():
+    """入库标准 v0.1：全库认知状态统计（读 knowledge/*.json sidecar）。"""
+    stats = {'total': 0, 'by_verification': {}, 'by_tier': {}}
+    kdir = BASE / 'knowledge'
+    if not kdir.exists():
+        return stats
+    for p in kdir.glob('*.json'):
+        if p.name in ('metadata-schema.json',):
+            continue
+        try:
+            sc = json.loads(p.read_text(encoding='utf-8'))
+        except (OSError, json.JSONDecodeError):
+            continue
+        stats['total'] += 1
+        v = sc.get('verification') or 'unlabeled'
+        t = sc.get('source_tier') or 'unlabeled'
+        stats['by_verification'][v] = stats['by_verification'].get(v, 0) + 1
+        stats['by_tier'][t] = stats['by_tier'].get(t, 0) + 1
+    return stats
+
+
 def _collect_status():
     from wiki_agent import WikiAgent
     agent = WikiAgent()
@@ -155,6 +176,7 @@ def _collect_status():
         'planner': agent.status(),
         'events_persisted': events_persisted,
         'latest_report': report.relative_to(BASE).as_posix() if report else None,
+        'epistemic': _epistemic_stats(),
     }
     if report:
         result['report_counts'] = _report_counts(report)

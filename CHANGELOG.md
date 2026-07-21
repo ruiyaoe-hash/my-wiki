@@ -7,6 +7,13 @@ All notable changes / 所有显著变更 to this project will be documented in t
 
 ---
 
+## [Unreleased]
+
+### Added
+- 入库标准 v0.1（docs/ingest-standard-v0.1.md）：知识可信度分级与标注制度。知识页 frontmatter 与 sidecar 新增四个认知状态字段（source_tier 来源分级 T1-T4、verification 核实状态、verified_at 核实时间、confidence 置信度）；ingest 协议按来源域名自动打来源等级（executor._classify_source_tier），默认 verification: unverified；metadata-schema 同步扩展（可选字段，存量 86 页不受影响）；`agent-runtime status` 与网页控制台健康总览新增全库核实状态统计；新增 TestSourceTierClassification 测试
+
+---
+
 ## [1.3.0] — 2026-07-19
 
 ### Fixed

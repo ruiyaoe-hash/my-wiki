@@ -102,9 +102,32 @@ class TestExecutorIngest(unittest.TestCase):
         self.assertEqual(sc['domain'], 'knowledge-management')
         self.assertEqual(sc['status'], 'draft')
 
+        # 4b. 入库标准 v0.1：认知状态字段（本地文件来源应为 T4 + unverified）
+        page_fm = self.page_file.read_text(encoding='utf-8-sig')
+        self.assertIn('source_tier: T4', page_fm)
+        self.assertIn('verification: unverified', page_fm)
+        self.assertEqual(sc['source_tier'], 'T4')
+        self.assertEqual(sc['verification'], 'unverified')
+
         # 5. index.md gained the new entry under 新入库
         index = self.index_path.read_text(encoding='utf-8')
         self.assertIn(f'- [[{TITLE}]] — Agent Runtime 自动入库', index)
+
+
+class TestSourceTierClassification(unittest.TestCase):
+    """入库标准 v0.1 来源分级（域名启发式）。"""
+
+    def test_tier_rules(self):
+        c = ProtocolExecutor._classify_source_tier
+        self.assertEqual(c('https://arxiv.org/abs/2603.07670'), 'T1')
+        self.assertEqual(c('https://www.nature.com/articles/x'), 'T1')
+        self.assertEqual(c('https://github.com/obra/superpowers'), 'T2')
+        self.assertEqual(c('https://deepmind.google/blog/x'), 'T2')
+        self.assertEqual(c('https://mp.weixin.qq.com/s/abc'), 'T3')
+        self.assertEqual(c('https://zhuanlan.zhihu.com/p/123'), 'T3')
+        self.assertEqual(c('some-random-blog.com/post'), 'T4')  # 无 scheme 按本地处理
+        self.assertEqual(c('/local/path/article.md'), 'T4')
+        self.assertEqual(c(''), 'T4')
 
 
 class TestExecutorHtmlAndSidecar(unittest.TestCase):

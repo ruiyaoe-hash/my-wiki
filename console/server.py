@@ -208,6 +208,7 @@ async function loadStatus(){
       stat('落盘事件', (s.events_persisted??0)+' 条') +
       stat('stale 页', c.stale_count??'?') +
       stat('断链', c.broken_count??'?') +
+      stat('已核实', (s.epistemic?(s.epistemic.by_verification.verified||0)+'/'+s.epistemic.total:'?')) +
       stat('最新报告', s.latest_report||'无');
     const ev = document.getElementById('events');
     ev.innerHTML = (s.recent_events||[]).map(x =>

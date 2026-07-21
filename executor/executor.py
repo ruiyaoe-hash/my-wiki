@@ -248,6 +248,26 @@ class ProtocolExecutor:
             excerpt = ' '.join(sents)[:200]
             lines.append(f'- **{s["heading"]}**' + (f': {excerpt}' if excerpt else ''))
         return '\n'.join(lines) + '\n'
+    TIER1_DOMAINS = ('arxiv.org', 'doi.org', 'nature.com', 'science.org',
+                     'pubmed.ncbi.nlm.nih.gov', 'ncbi.nlm.nih.gov', 'acm.org',
+                     'ieee.org', 'springer.com', 'sciencedirect.com', 'wiley.com')
+    TIER2_DOMAINS = ('github.com', 'gitlab.com', 'readthedocs.io', 'gov.cn',
+                     'w3.org', 'rfc-editor.org', 'openai.com', 'anthropic.com',
+                     'deepmind.google', 'research.google', 'microsoft.com')
+
+    @classmethod
+    def _classify_source_tier(cls, url_or_path):
+        """入库标准 v0.1 来源分级（域名启发式，只看来源属性不看内容）。
+        T1 一手学术/官方；T2 权威机构/一手工程；T3 自媒体/二手；T4 本地或不明。"""
+        if not url_or_path or '://' not in url_or_path:
+            return 'T4'  # 本地文件或无 URL
+        host = re.sub(r'^https?://', '', url_or_path).split('/')[0].lower()
+        if any(host == d or host.endswith('.' + d) for d in cls.TIER1_DOMAINS):
+            return 'T1'
+        if any(host == d or host.endswith('.' + d) for d in cls.TIER2_DOMAINS):
+            return 'T2'
+        return 'T3'  # 有 URL 但不在白名单：按二手转述处理
+
     def _handle_create_knowledge_page(self, p):
         title = p.get('title', 'Untitled'); domain = p.get('domain', 'knowledge-management'); output_dir = BASE_DIR / p.get('output_dir', '知识库/'); output_dir.mkdir(parents=True, exist_ok=True)
         tags_raw = p.get('tags', []); tags = [t.strip() for t in tags_raw.split(',')] if isinstance(tags_raw, str) else (tags_raw if isinstance(tags_raw, list) else [])
@@ -257,7 +277,11 @@ class ProtocolExecutor:
         source_stem = Path(p['source_path']).stem if p.get('source_path') else None
         source_fm = f'source: "{source_stem}"\n' if source_stem else ''
         source_sec = f'\n## 来源\n\n- [[{source_stem}]]\n' if source_stem else ''
-        page = f'---\ntitle: "{title}"\ncreated: "{today}"\nupdated: "{today}"\ntype: concept\ndomain: {domain}\nstatus: draft\n{source_fm}tags:\n{tags_s}\n---\n\n# {title}\n\n> Agent Runtime ingest 协议自动生成。\n{source_sec}'
+        # 入库标准 v0.1：自动来源分级 + 默认未核实（docs/ingest-standard-v0.1.md）
+        tier = self._classify_source_tier(p.get('source_url'))
+        epistemic_fm = (f'source_tier: {tier}\nverification: unverified\n'
+                        f'verified_at: null\nconfidence: low\n')
+        page = f'---\ntitle: "{title}"\ncreated: "{today}"\nupdated: "{today}"\ntype: concept\ndomain: {domain}\nstatus: draft\n{source_fm}{epistemic_fm}tags:\n{tags_s}\n---\n\n# {title}\n\n> Agent Runtime ingest 协议自动生成。\n{source_sec}'
         with open(dest, 'w', encoding='utf-8-sig') as f: f.write(page)
         return {'page_path': str(dest.relative_to(BASE_DIR)), 'title': title}
     def _parse_frontmatter(self, content):
@@ -300,6 +324,10 @@ class ProtocolExecutor:
               'tags': fm.get('tags') if isinstance(fm.get('tags'), list) else [],
               'source_refs': [fm['source']] if fm.get('source') else [],
               'related': fm.get('related') if isinstance(fm.get('related'), list) else ([fm['related']] if fm.get('related') else []),
+              'source_tier': fm.get('source_tier') or None,
+              'verification': fm.get('verification') or None,
+              'verified_at': fm.get('verified_at') if fm.get('verified_at') not in (None, '', 'null', 'None') else None,
+              'confidence': fm.get('confidence') or None,
               'dependencies': [], 'outgoing_links': links, 'freshness_score': 1.0}
         fn = page_path.stem.replace(' ', '_').replace('?', '').replace(':', '-').lower() + '.json'; dest = output_dir / fn
         with open(dest, 'w', encoding='utf-8') as f: json.dump(sc, f, ensure_ascii=False, indent=2)

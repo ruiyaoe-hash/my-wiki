@@ -48,6 +48,7 @@
         "tags": "{{inputs.tags}}",
         "domain": "{{inputs.domain}}",
         "source_path": "{{steps.1.original_path}}",
+        "source_url": "{{inputs.url_or_path}}",
         "output_dir": "知识库/"
       },
       "description": "创建知识页"
